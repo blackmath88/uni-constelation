@@ -1,0 +1,606 @@
+{
+  "sources": [
+    {
+      "faculty": "law",
+      "name": "UNIverse public org-unit publication listing",
+      "url": "https://universe.unibas.ch/org-units/47838/publications",
+      "endpoint": "https://universe-intern.unibas.ch/api/public/prp/orgUnits/publications",
+      "orgUnitId": "47838"
+    },
+    {
+      "faculty": "economics",
+      "name": "UNIverse public org-unit publication listing",
+      "url": "https://universe.unibas.ch/org-units/47827/publications",
+      "endpoint": "https://universe-intern.unibas.ch/api/public/prp/orgUnits/publications",
+      "orgUnitId": "47827"
+    },
+    {
+      "name": "edoc",
+      "url": "https://edoc.unibas.ch"
+    }
+  ],
+  "sourceCoverage": {
+    "law": {
+      "orgUnitId": "47838",
+      "reportedTotal": 7807,
+      "unique": 7807,
+      "stopReason": "source-reported total reached",
+      "complete": true,
+      "pagesFailed": 0
+    },
+    "economics": {
+      "orgUnitId": "47827",
+      "reportedTotal": 3127,
+      "unique": 3127,
+      "stopReason": "source-reported total reached",
+      "complete": true,
+      "pagesFailed": 0
+    }
+  },
+  "overlap": 1,
+  "combination": {
+    "missingSources": [],
+    "recordConflicts": [],
+    "enrichmentConflicts": [],
+    "identifierConflicts": [
+      {
+        "kind": "handle",
+        "value": "20.500.14716/100029",
+        "sourceRecordIds": [
+          "139582",
+          "139594"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/101659",
+        "sourceRecordIds": [
+          "141298",
+          "141370"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/102765",
+        "sourceRecordIds": [
+          "140368",
+          "142624"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/113037",
+        "sourceRecordIds": [
+          "154073",
+          "164002"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/117169",
+        "sourceRecordIds": [
+          "158825",
+          "170907"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1007/978-3-662-52663-7",
+        "sourceRecordIds": [
+          "158972",
+          "158973"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/121965",
+        "sourceRecordIds": [
+          "167651",
+          "167652"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1024/0040-5930.59.11.613",
+        "sourceRecordIds": [
+          "112090",
+          "136792"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1108/13590790310808899",
+        "sourceRecordIds": [
+          "111841",
+          "112729"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/76523",
+        "sourceRecordIds": [
+          "113400",
+          "116645"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1628/002268810793536118",
+        "sourceRecordIds": [
+          "114675",
+          "115580"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/81802",
+        "sourceRecordIds": [
+          "118942",
+          "119028"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/85568",
+        "sourceRecordIds": [
+          "123257",
+          "259866"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/93676",
+        "sourceRecordIds": [
+          "131947",
+          "132426"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/96911",
+        "sourceRecordIds": [
+          "112885",
+          "136102"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/99519",
+        "sourceRecordIds": [
+          "138984",
+          "139050"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/99545",
+        "sourceRecordIds": [
+          "138988",
+          "139049"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/101075",
+        "sourceRecordIds": [
+          "140631",
+          "176506"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1080/10168737.2014.907629",
+        "sourceRecordIds": [
+          "139744",
+          "146619"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1002/oca.2301",
+        "sourceRecordIds": [
+          "144058",
+          "146580"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1017/s1365100516001115",
+        "sourceRecordIds": [
+          "144059",
+          "146581"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/106324",
+        "sourceRecordIds": [
+          "146634",
+          "180983"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1016/j.jhealeco.2015.07.002",
+        "sourceRecordIds": [
+          "137539",
+          "146604"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1080/13518470802423445",
+        "sourceRecordIds": [
+          "146642",
+          "99831"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.3790/vjh.78.4.119",
+        "sourceRecordIds": [
+          "102755",
+          "146635"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1111/j.1468-0475.2008.00452.x",
+        "sourceRecordIds": [
+          "106347",
+          "146651"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.2139/ssrn.1137924",
+        "sourceRecordIds": [
+          "146644",
+          "99810"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1002/j.1662-6370.2007.tb00075.x",
+        "sourceRecordIds": [
+          "147143",
+          "98363"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1108/s1049-258520190000027002",
+        "sourceRecordIds": [
+          "152655",
+          "157389"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1111/geer.12185",
+        "sourceRecordIds": [
+          "152193",
+          "152194"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1093/jcr/ucx102",
+        "sourceRecordIds": [
+          "147618",
+          "157832"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/116309",
+        "sourceRecordIds": [
+          "147618",
+          "157832"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/119750",
+        "sourceRecordIds": [
+          "162469",
+          "163367"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/121522",
+        "sourceRecordIds": [
+          "166330",
+          "166492"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/148292",
+        "sourceRecordIds": [
+          "238511",
+          "257336"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.5451/unibas-006356910",
+        "sourceRecordIds": [
+          "137740",
+          "251479"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/142623",
+        "sourceRecordIds": [
+          "137740",
+          "251479"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1126/sciadv.aeb9403",
+        "sourceRecordIds": [
+          "273666",
+          "274621"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/210563",
+        "sourceRecordIds": [
+          "273666",
+          "274621"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1177/11786329231153278",
+        "sourceRecordIds": [
+          "166344",
+          "97280"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/61112",
+        "sourceRecordIds": [
+          "166344",
+          "97280"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1007/978-3-540-85711-2",
+        "sourceRecordIds": [
+          "103035",
+          "99800"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1007/s11408-002-0202-y",
+        "sourceRecordIds": [
+          "100342",
+          "100343"
+        ]
+      },
+      {
+        "kind": "handle",
+        "value": "20.500.14716/79023",
+        "sourceRecordIds": [
+          "116033",
+          "116105"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1111/j.1558-5646.2011.01477.x",
+        "sourceRecordIds": [
+          "119804",
+          "125320"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1007/978-3-8349-6664-3",
+        "sourceRecordIds": [
+          "119850",
+          "119866",
+          "119869"
+        ]
+      },
+      {
+        "kind": "doi",
+        "value": "10.1016/j.jimonfin.2013.06.012",
+        "sourceRecordIds": [
+          "125290",
+          "136000"
+        ]
+      }
+    ]
+  },
+  "retrievalStarted": "2026-10-15T17:11:30Z",
+  "snapshotDate": "2026-10-15",
+  "sourceReportedTotal": 10934,
+  "maxRecordsRequested": 12000,
+  "pagesFetched": 23,
+  "pagesFailed": 0,
+  "fetched": 10934,
+  "unique": 10933,
+  "duplicatesSkipped": 0,
+  "stopReason": "law: source-reported total reached; economics: source-reported total reached",
+  "samplingRule": "UNIverse listing order (newest first as displayed), first N unique records",
+  "yearRange": [
+    1972,
+    2026
+  ],
+  "publicationsWithoutYear": 0,
+  "byYear": {
+    "1972": 1,
+    "1973": 3,
+    "1975": 1,
+    "1976": 1,
+    "1978": 2,
+    "1979": 1,
+    "1980": 4,
+    "1981": 1,
+    "1982": 5,
+    "1983": 8,
+    "1984": 6,
+    "1985": 8,
+    "1986": 7,
+    "1987": 10,
+    "1988": 13,
+    "1989": 22,
+    "1990": 27,
+    "1991": 32,
+    "1992": 32,
+    "1993": 25,
+    "1994": 39,
+    "1995": 38,
+    "1996": 71,
+    "1997": 85,
+    "1998": 111,
+    "1999": 110,
+    "2000": 150,
+    "2001": 148,
+    "2002": 199,
+    "2003": 178,
+    "2004": 233,
+    "2005": 250,
+    "2006": 290,
+    "2007": 317,
+    "2008": 362,
+    "2009": 433,
+    "2010": 533,
+    "2011": 557,
+    "2012": 486,
+    "2013": 508,
+    "2014": 526,
+    "2015": 466,
+    "2016": 554,
+    "2017": 425,
+    "2018": 423,
+    "2019": 373,
+    "2020": 404,
+    "2021": 475,
+    "2022": 441,
+    "2023": 463,
+    "2024": 471,
+    "2025": 403,
+    "2026": 202
+  },
+  "byType": {
+    "Journal article": 4133,
+    "Book chapter": 2388,
+    "Working paper & report": 820,
+    "Book": 811,
+    "Commentary contribution": 590,
+    "Media & online": 580,
+    "Case note": 445,
+    "Edited volume": 368,
+    "Book review": 337,
+    "Other": 252,
+    "Thesis": 209
+  },
+  "typeSource": {
+    "edoc": 9153,
+    "inferred from citation format": 1780
+  },
+  "abstractCoverage": {
+    "withAbstract": 2742,
+    "share": 0.251
+  },
+  "edoc": {
+    "matched": 9153,
+    "byMethod": {
+      "handle": 9110,
+      "doi": 4,
+      "title+year+author": 39
+    },
+    "unresolved": 1780,
+    "unresolvedReasons": {
+      "no edoc candidate found": 1394,
+      "title too short/generic for title matching": 327,
+      "title match but year differs (2016)": 6,
+      "title match but year differs (2026)": 6,
+      "title match but year differs (2019)": 4,
+      "title match but year differs (2015)": 4,
+      "title match but year differs (2017)": 4,
+      "title match but year differs (2012)": 3,
+      "title match but year differs (2023)": 3,
+      "title match but year differs (2021)": 3,
+      "title match but year differs (2013)": 3,
+      "title match but year differs (2009)": 3,
+      "title match but year differs (2011)": 3,
+      "title match but year differs (2024)": 3,
+      "title match but year differs (2007)": 2,
+      "title match but year differs (2018)": 2,
+      "title match but year differs (2014)": 2,
+      "title+year match without shared author family name": 2,
+      "title match but year differs (2020)": 1,
+      "title match but year differs (2010)": 1,
+      "title match but year differs (2006)": 1,
+      "title match but year differs (2025)": 1,
+      "title match but year differs (2022)": 1,
+      "title match but year differs (2003)": 1
+    },
+    "requestsUsed": 361,
+    "requestCap": 1050,
+    "capReached": false
+  },
+  "incompleteAuthorLists": 184,
+  "publicationsWithParseWarnings": 1133,
+  "publicationsWithoutTopicTerms": 364,
+  "identities": {
+    "name-only": 6782,
+    "edoc-person-record": 852,
+    "initials-only": 584,
+    "single-name": 24
+  },
+  "unresolvedIdentities": 7390,
+  "edges": {
+    "thematic-similarity": 28173,
+    "author-of": 23746,
+    "coauthorship": 22317
+  },
+  "suggestions": 32,
+  "hyperauthoredPublications": [
+    {
+      "publicationId": "p-278320",
+      "authorCount": 494
+    },
+    {
+      "publicationId": "p-244939",
+      "authorCount": 69
+    },
+    {
+      "publicationId": "p-238428",
+      "authorCount": 342
+    },
+    {
+      "publicationId": "p-238957",
+      "authorCount": 1626
+    },
+    {
+      "publicationId": "p-163704",
+      "authorCount": 1145
+    },
+    {
+      "publicationId": "p-144972",
+      "authorCount": 798
+    }
+  ],
+  "knownExclusions": [
+    "Only the Law (47838) and Business and Economics (47827) org-unit listings are in scope.",
+    "Faculty listing membership is not evidence of a person's current employment or discipline.",
+    "No full texts, reference lists or citation links were collected.",
+    "No ORCID enrichment in this slice.",
+    "Records not found in edoc have only citation-derived authors, types and no abstracts.",
+    "Author lists shortened with 'et al.' are incomplete unless edoc provides the full list.",
+    "Publications with more than 50 authors keep author-of evidence but are not expanded into all pairwise coauthor edges."
+  ]
+}

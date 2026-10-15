@@ -1,0 +1,71 @@
+[
+  {
+    "name": "journal article, three authors, curly quotes, DOI",
+    "html": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">van Kolfschooten, Hannah, Solaiman, Barry and Onitiu, Daria (2026) &lsquo;High-risk without safeguards? The EU AI Act and the push for deregulation of medical AI&rsquo;, <span style=\"font-style: italic\">BMJ Digital Health &amp; AI</span>, 2. Available at: https://doi.org/10.1136/bmjdh-2026-000184.</div>\n</div>",
+    "urls": {"DOI": "https://doi.org/10.1136/bmjdh-2026-000184", "EDOC": "https://hdl.handle.net/20.500.14716/222654"},
+    "expect": {"year": 2026, "type": "Journal article", "doi": "10.1136/bmjdh-2026-000184", "etAl": false,
+      "authors": [["van Kolfschooten", "Hannah"], ["Solaiman", "Barry"], ["Onitiu", "Daria"]],
+      "title": "High-risk without safeguards? The EU AI Act and the push for deregulation of medical AI",
+      "container": "BMJ Digital Health & AI"}
+  },
+  {
+    "name": "et al. truncation",
+    "html": "<div class=\"csl-entry\">van Kessel, Robin et al. (2025) &lsquo;Artificial intelligence, intellectual property, and human rights: mapping the legal landscape in European health systems&rsquo;, <span style=\"font-style: italic\">npj Health Systems</span>, 2(1). Available at: https://doi.org/10.1038/s44401-025-00050-3.</div>",
+    "urls": {"DOI": "https://doi.org/10.1038/s44401-025-00050-3"},
+    "expect": {"year": 2025, "etAl": true, "authors": [["van Kessel", "Robin"]], "type": "Journal article"}
+  },
+  {
+    "name": "initials-only given name",
+    "html": "<div class=\"csl-entry\">van Kolfschooten, H. (2026) &lsquo;Governing AI in Public Health: Advancing the Right to Health Through an Intersectional Lens&rsquo;, in <span style=\"font-style: italic\">Ius Gentium</span>. (Ius Gentium), pp. 379&ndash;400. Available at: https://doi.org/10.1007/978-3-032-26434-3_17.</div>",
+    "urls": {"DOI": "https://doi.org/10.1007/978-3-032-26434-3_17"},
+    "expect": {"authors": [["van Kolfschooten", "H."]], "initialsOnly": [true], "type": "Book chapter", "doi": "10.1007/978-3-032-26434-3_17"}
+  },
+  {
+    "name": "accents and HTML entities, abbreviated middle name",
+    "html": "<div class=\"csl-entry\">M&uuml;ller, Andreas Th. (2026) &lsquo;30 Jahre &Ouml;sterreich in der EU - eine Perspektive aus der Schweiz&rsquo;, <span style=\"font-style: italic\">Zeitschrift f&uuml;r &ouml;ffentliches Recht</span>, 81(1), pp. 77&ndash;91. Available at: https://doi.org/10.33196/zoer202601007701.</div>",
+    "urls": {},
+    "expect": {"authors": [["Müller", "Andreas Th."]], "title": "30 Jahre Österreich in der EU - eine Perspektive aus der Schweiz", "container": "Zeitschrift für öffentliches Recht", "doi": "10.33196/zoer202601007701"}
+  },
+  {
+    "name": "DOI field holding a handle URL (escaped DOI URL) is not accepted as a DOI",
+    "html": "<div class=\"csl-entry\">van Kolfschooten, Hannah (2025) <span style=\"font-style: italic\">Patients&rsquo; rights protection and artificial intelligence in the European Union</span>. University of Amsterdam. Available at: https://doi.org/https://hdl.handle.net/11245.1/5c33534b-9b23-409d-ac0f-c2a4b0e70949.</div>",
+    "urls": {"DOI": "https://doi.org/https://hdl.handle.net/11245.1/5c33534b-9b23-409d-ac0f-c2a4b0e70949"},
+    "expect": {"doi": null, "warningContains": "DOI field is not a DOI", "type": "Book", "title": "Patients’ rights protection and artificial intelligence in the European Union"}
+  },
+  {
+    "name": "missing identifiers, commentary contribution, two authors",
+    "html": "<div class=\"csl-entry\">Trechsel, Stefan and Geth, Christopher (2025) &lsquo;Vor Art. 30-33 (Strafantragrecht)&rsquo;, in <span style=\"font-style: italic\">Schweizerisches Strafgesetzbuch, Praxiskommentar, hrsg. von Trechsel, Stefan/Pieth, Mark/Geth, Christopher</span>. 5. Auflage . Z&uuml;rich : Dike.</div>",
+    "urls": {},
+    "expect": {"doi": null, "type": "Commentary contribution", "authors": [["Trechsel", "Stefan"], ["Geth", "Christopher"]]}
+  },
+  {
+    "name": "literal 'Given Family' name, thesis",
+    "html": "<div class=\"csl-entry\">Mirina Grosz (2025) <span style=\"font-style: italic\">Staatliche Aufsicht &uuml;ber private Akteure der Wirtschaft</span>. Postdoctoral Thesis. University of Basel.</div>",
+    "urls": {},
+    "expect": {"authors": [["Grosz", "Mirina"]], "type": "Thesis", "warningContains": "name order inferred"}
+  },
+  {
+    "name": "book chapter with editors before container",
+    "html": "<div class=\"csl-entry\">Blank, Paula (2025) &lsquo;Dynamik und Entwicklungen im schweizerischen Personengesellschaftsrecht?&rsquo;, in Denga, Michael (ed.) <span style=\"font-style: italic\">Modernes Personengesellschaftsrecht</span>. T&uuml;bingen: Mohr Siebeck, pp. 615&ndash;632. Available at: https://doi.org/10.1628/978-3-16-163707-0.</div>",
+    "urls": {"DOI": "https://doi.org/10.1628/978-3-16-163707-0"},
+    "expect": {"type": "Book chapter", "container": "Modernes Personengesellschaftsrecht", "authors": [["Blank", "Paula"]]}
+  },
+  {
+    "name": "double family name and mixed literal + inverted names",
+    "html": "<div class=\"csl-entry\">Sabine Gless, Widmer L&uuml;chinger, Corinne and Bachmann, Lea (2024) <span style=\"font-style: italic\">Kryptowerte</span>. Basel: Helbing Lichtenhahn Verlag.</div>",
+    "urls": {},
+    "expect": {"authors": [["Gless", "Sabine"], ["Widmer Lüchinger", "Corinne"], ["Bachmann", "Lea"]], "type": "Book"}
+  },
+  {
+    "name": "missing year",
+    "html": "<div class=\"csl-entry\">Pieth, Mark (n.d.) &lsquo;Korruption im Sport&rsquo;, <span style=\"font-style: italic\">Sport und Recht</span>.</div>",
+    "urls": {},
+    "expect": {"year": null, "warningContains": "no date", "authors": [["Pieth", "Mark"]], "type": "Journal article"}
+  },
+  {
+    "name": "edited volume author marked (ed.)",
+    "html": "<div class=\"csl-entry\">Braun Binder, Nadja (ed.) (2023) <span style=\"font-style: italic\">Digitale Verwaltung</span>. Z&uuml;rich: Schulthess.</div>",
+    "urls": {},
+    "expect": {"authors": [["Braun Binder", "Nadja"]], "editor": true, "type": "Book", "year": 2023}
+  }
+]
