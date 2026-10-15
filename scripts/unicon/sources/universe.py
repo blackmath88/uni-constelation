@@ -39,7 +39,7 @@ def collect(client: PoliteClient, org_unit_id: str, max_records: int, page_size:
             pages.append({"page": page, "error": str(exc)})
             stop_reason = f"request failed on page {page}: {exc}"
             break
-        fetched_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        fetched_at = client.last_fetched_at or time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         data = resp.get("data") or []
         pag = resp.get("pagination") or {}
         reported_total = pag.get("total", reported_total)

@@ -1,0 +1,28 @@
+name: ci
+# Validation and static build only. No deployment, no scheduled crawling.
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install numpy
+      - run: npm ci
+      - name: Parser fixtures + data contract
+        run: npm test
+      - name: Graph rebuild is deterministic (two runs on this runner agree)
+        run: |
+          python3 scripts/build_graph.py && node scripts/layout.mjs && cp -r data /tmp/run1
+          python3 scripts/build_graph.py && node scripts/layout.mjs
+          diff -r -q /tmp/run1 data
+          npm run validate
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e

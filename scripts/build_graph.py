@@ -22,7 +22,9 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from unicon.citation import INITIALS_RE, fold, parse_citation  # noqa: E402
-from unicon.text import CONCEPTS, STOPWORDS, analyse, concept_label, detect_language  # noqa: E402
+from unicon.text import CONCEPTS, analyse, concept_label, detect_language  # noqa: E402
+
+CONCEPT_RX = {cid: re.compile(rx) for cid, (_l, rx) in CONCEPTS.items()}
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -37,15 +39,39 @@ RES_MIN_PUBS = 3
 RES_TOP_K = 3
 RES_MIN_SIM = 0.20
 EVIDENCE_MIN_SIM = 0.18
-MAX_TOPICS = 12
+AREA_VOTE_MIN_SIM = 0.22
+AREA_VOTE_MIN_TOTAL = 0.6
+# Broad legal areas, each a set of concept-lexicon entries (scripts/unicon/text.py)
+LEGAL_AREAS = [
+    ("Criminal law & procedure", ["c_criminal", "c_crimproc", "c_sanctions", "c_corruption"]),
+    ("Public law & environment", ["c_const", "c_admin", "c_environment"]),
+    ("Human rights & migration", ["c_humanrights", "c_migration"]),
+    ("European & international law", ["c_eu", "c_intl", "c_trade"]),
+    ("Contract, sales & property", ["c_contract", "c_sales", "c_property"]),
+    ("Company & competition law", ["c_company", "c_competition"]),
+    ("Family & succession", ["c_family", "c_succession"]),
+    ("Labour & social security", ["c_labour", "c_socialsec"]),
+    ("Health law & ethics", ["c_health", "c_ethics", "c_animal"]),
+    ("Technology, data & IP", ["c_ai", "c_dataprot", "c_digital", "c_ip"]),
+    ("Procedure, arbitration & liability", ["c_civproc", "c_arbitration", "c_liability"]),
+    ("Tax, finance & insolvency", ["c_tax", "c_finance", "c_insolvency"]),
+    ("Legal theory & history", ["c_legaltheory"]),
+]
 
+# edoc dc.type -> harmonised display category (raw edoc value kept as sourceType)
 EDOC_TYPE_LABELS = {
-    "journal_article": "Journal article", "article": "Journal article", "review": "Review / commentary article",
-    "book_part": "Book chapter", "book_chapter": "Book chapter", "book": "Book", "edited_book": "Edited book",
-    "thesis": "Thesis", "doctoral_thesis": "Thesis", "conference_paper": "Conference paper",
-    "conference_object": "Conference paper", "working_paper": "Working paper", "report": "Report",
-    "other": "Other", "newspaper_article": "Newspaper / magazine article", "book_review": "Book review",
-    "case_note": "Case note", "commentary": "Commentary contribution",
+    "journal_article": "Journal article", "journal_contribution": "Journal article", "short_survey": "Journal article",
+    "letter_to_the_editor": "Journal article", "editorial": "Journal article", "review": "Journal article",
+    "book_section": "Book chapter", "book_chapter": "Book chapter", "beitrag_in_festschrift": "Book chapter",
+    "encyclopedia_entry": "Book chapter",
+    "legal_commentary": "Commentary contribution", "juristischer_kommentar": "Commentary contribution",
+    "book": "Book", "edited_book": "Edited volume", "case_note": "Case note", "book_review": "Book review",
+    "doctoral_thesis": "Thesis", "postdoctoral_thesis": "Thesis", "thesis": "Thesis", "master_thesis": "Thesis",
+    "preprint": "Working paper & report", "working_paper": "Working paper & report", "report": "Working paper & report",
+    "conference_paper": "Working paper & report", "conference_object": "Working paper & report",
+    "news_and_magazine_item": "Media & online", "newspaper_article": "Media & online", "newsletter_article": "Media & online",
+    "blogpost": "Media & online", "website": "Media & online", "website_content": "Media & online", "audio_video": "Media & online",
+    "other": "Other",
 }
 
 LANG_ISO3 = {"deu": "de", "ger": "de", "eng": "en", "fra": "fr", "fre": "fr", "ita": "it", "spa": "es", "nld": "nl", "dut": "nl"}
@@ -147,31 +173,13 @@ def build_tfidf(docs: list[list[str]]):
     return vocab, mat, df, max_df
 
 
-def kmeans(x: np.ndarray, k: int, seed: int = 42, iters: int = 40) -> np.ndarray:
-    """Spherical k-means with deterministic k-means++ init."""
-    rng = np.random.RandomState(seed)
-    n = x.shape[0]
-    centers = [x[rng.randint(n)]]
-    d2 = np.full(n, np.inf)
-    for _ in range(1, k):
-        d2 = np.minimum(d2, 1 - x @ centers[-1])
-        d2 = np.clip(d2, 0, None)
-        p = d2 / d2.sum() if d2.sum() > 0 else np.full(n, 1 / n)
-        centers.append(x[rng.choice(n, p=p)])
-    c = np.stack(centers)
-    labels = np.zeros(n, dtype=int)
-    for _ in range(iters):
-        sims = x @ c.T
-        new = sims.argmax(1)
-        if np.array_equal(new, labels) and _ > 0:
-            break
-        labels = new
-        for j in range(k):
-            members = x[labels == j]
-            if len(members):
-                v = members.sum(0)
-                c[j] = v / (np.linalg.norm(v) or 1)
-    return labels
+def near_duplicate_titles(a: str, b: str, threshold: float = 0.6) -> bool:
+    """Token Jaccard on folded titles without numbers: catches yearly series and new editions."""
+    ta = {t for t in fold(a).split() if not t.isdigit() and len(t) > 2}
+    tb = {t for t in fold(b).split() if not t.isdigit() and len(t) > 2}
+    if not ta or not tb:
+        return False
+    return len(ta & tb) / len(ta | tb) >= threshold
 
 
 def display_term(term: str, surfaces: dict[str, Counter]) -> str:
@@ -232,7 +240,7 @@ def main() -> None:
         title = (item or {}).get("title") or pc.title or "(untitled)"
         year = pc.year if pc.year is not None else (item or {}).get("year")
         if item and item["type"]:
-            ptype, type_source = EDOC_TYPE_LABELS.get(item["type"], item["type"].replace("_", " ").capitalize()), "edoc"
+            ptype, type_source = EDOC_TYPE_LABELS.get(item["type"], "Other"), "edoc"
         else:
             ptype, type_source = pc.publication_type, "inferred from citation format"
         lang, lang_source = None, None
@@ -243,7 +251,13 @@ def main() -> None:
             if guess:
                 lang, lang_source = guess, "heuristic (title function words)"
         abstract = (item or {}).get("abstract") or None
-        doi = pc.doi or (item or {}).get("doi")
+        doi = pc.doi
+        if not doi and item and item.get("doi"):
+            m = re.match(r"^(10\.\d{4,9}/\S+)$", item["doi"].strip())
+            if m:
+                doi = m.group(1)
+            else:
+                warnings.append(f"edoc DOI field is not a DOI: {item['doi'][:80]}")
         handle_url = rec["urls"].get("EDOC") or (f"https://hdl.handle.net/{item['handle']}" if item and item.get("handle") else None)
         links = {"listing": listing["listingUrl"]}
         if doi:
@@ -260,6 +274,7 @@ def main() -> None:
             "year": year,
             "publicationType": ptype,
             "publicationTypeSource": type_source,
+            "sourceType": (item or {}).get("type"),
             "authors": authors,
             "authorsComplete": authors_complete,
             "authorsSource": authors_source,
@@ -294,24 +309,46 @@ def main() -> None:
     print(f"vocabulary: {len(vocab)} terms (min df {MIN_DF}, max df {max_df})")
     empty = int((np.abs(mat).sum(1) == 0).sum())
 
-    # ---------------- topics
-    k = max(3, min(MAX_TOPICS, n // 40))
-    labels = kmeans(mat, k)
+    # ---------------- topics: legal areas from the concept lexicon, nearest-centroid fallback
+    k = len(LEGAL_AREAS)
+    cidx = {t: i for i, t in enumerate(vocab) if t.startswith("c_")}
+    area_cols = [[cidx[c] for c in concepts if c in cidx] for _name, concepts in LEGAL_AREAS]
+    labels = np.full(n, -1)
+    basis: list[str | None] = [None] * n
+    for i in range(n):
+        scores = [float(mat[i, cols].sum()) if cols else 0.0 for cols in area_cols]
+        best = int(np.argmax(scores))
+        if scores[best] > 0:
+            labels[i], basis[i] = best, "concept lexicon"
+    # fallback: similarity-weighted vote of the 10 most similar lexicon-classified publications
+    classified = np.where(labels >= 0)[0]
+    rest = np.where((labels == -1) & (np.abs(mat).sum(1) > 0))[0]
+    for start in range(0, len(rest), 512):
+        chunk_ids = rest[start:start + 512]
+        sims = mat[chunk_ids] @ mat[classified].T
+        for row, i in enumerate(chunk_ids):
+            nn = np.argpartition(-sims[row], 10)[:10]
+            votes = np.zeros(k)
+            for t in nn:
+                if sims[row, t] >= AREA_VOTE_MIN_SIM:
+                    votes[labels[classified[t]]] += sims[row, t]
+            j = int(np.argmax(votes))
+            if votes[j] >= AREA_VOTE_MIN_TOTAL:
+                labels[i], basis[i] = j, "similar classified publications"
     global_mean = mat.mean(0)
     topics = []
-    order = sorted(range(k), key=lambda j: -(labels == j).sum())
-    remap = {old: new for new, old in enumerate(order)}
-    labels = np.array([remap[l] for l in labels])
-    for j in range(k):
+    for j, (name, concepts) in enumerate(LEGAL_AREAS):
         members = mat[labels == j]
         centroid = members.mean(0) if len(members) else global_mean
         distinct = centroid - global_mean
-        top = np.argsort(-distinct)[:8]
-        terms = [display_term(vocab[t], surfaces_all) for t in top if distinct[t] > 0]
-        topics.append({"id": f"t{j}", "label": " · ".join(terms[:3]), "terms": terms,
-                       "size": int(len(members))})
+        top = [t for t in np.argsort(-distinct)[:12] if distinct[t] > 0 and not vocab[t].startswith("c_")]
+        topics.append({"id": f"t{j}", "label": name, "concepts": [concept_label(c) for c in concepts],
+                       "terms": [display_term(vocab[t], surfaces_all) for t in top][:8], "size": int(len(members)),
+                       "byBasis": dict(Counter(basis[i] for i in np.where(labels == j)[0]))})
     for i, p in enumerate(pubs):
-        p["topicId"] = f"t{labels[i]}" if np.abs(mat[i]).sum() > 0 else None
+        p["topicId"] = f"t{labels[i]}" if labels[i] >= 0 else None
+        p["topicBasis"] = basis[i]
+    print(f"topics: {k} legal areas; basis {dict(Counter(basis))}")
 
     # ---------------- publication similarity (sparse top-k)
     sim_edges = []
@@ -340,16 +377,21 @@ def main() -> None:
     def shared_terms(i: int, j: int, limit: int = 6) -> list[str]:
         common = pub_top_terms[i] & pub_top_terms[j]
         ranked = sorted(common, key=lambda t: -(mat[i, t] * mat[j, t]))
-        return [display_term(vocab[t], surfaces_all) for t in ranked[:limit]]
+        out: list[str] = []
+        for t in ranked:
+            d = display_term(vocab[t], surfaces_all)
+            if d not in out:
+                out.append(d)
+            if len(out) == limit:
+                break
+        return out
 
     edges = []
     for (a, b), s in sorted(best.items()):
         edges.append({
             "source": pubs[a]["id"], "target": pubs[b]["id"], "type": "thematic-similarity",
-            "score": round(s, 3), "sharedTerms": shared_terms(a, b),
+            "score": round(s, 3), "sharedTerms": shared_terms(a, b, 4),
             "evidencePublicationIds": [pubs[a]["id"], pubs[b]["id"]],
-            "method": METHOD_VERSION, "evidenceBasis": "titles, edoc abstracts and keywords where available",
-            "confidenceLabel": "derived suggestion",
         })
 
     # ---------------- researchers
@@ -373,20 +415,17 @@ def main() -> None:
             for y in range(x + 1, len(rids)):
                 pair_pubs[(rids[x], rids[y])].append(p["id"])
         for r in rids:
-            edges.append({"source": r, "target": p["id"], "type": "author-of",
-                          "evidencePublicationIds": [p["id"]], "method": "listed-author",
-                          "evidenceBasis": f"author list ({p['authorsSource']})", "confidenceLabel": "observed"})
+            edges.append({"source": r, "target": p["id"], "type": "author-of", "evidencePublicationIds": [p["id"]]})
     for (a, b), plist in sorted(pair_pubs.items()):
         edges.append({"source": a, "target": b, "type": "coauthorship", "weight": len(plist),
-                      "evidencePublicationIds": plist, "method": "shared-publication-record",
-                      "evidenceBasis": "both appear in the author list of the cited publication(s)",
-                      "confidenceLabel": "observed"})
+                      "evidencePublicationIds": plist})
     coauthors = {k for k in pair_pubs}
 
     # researcher thematic profiles — mean of publication vectors, then L2-normalised,
     # so volume does not increase a profile's weight
     eligible = [r for r, p in people.items()
                 if len(p["publicationIds"]) >= RES_MIN_PUBS and p["identityStatus"] in ("edoc-person-record", "name-only")]
+    edoc_linked = {r for r, p in people.items() if p["identityStatus"] == "edoc-person-record"}
     eligible.sort()
     prof = np.zeros((len(eligible), mat.shape[1]), dtype=np.float32)
     for i, r in enumerate(eligible):
@@ -406,6 +445,8 @@ def main() -> None:
                 a, b = sorted((r, eligible[j]))
                 if (a, b) in seen_pairs or (a, b) in coauthors:
                     continue
+                if a not in edoc_linked and b not in edoc_linked:
+                    continue  # at least one side must be linked to a University of Basel edoc person record
                 pa = [pub_index[x] for x in people[a]["publicationIds"]]
                 pb = [pub_index[x] for x in people[b]["publicationIds"]]
                 # only pubs that are not jointly authored
@@ -423,6 +464,8 @@ def main() -> None:
                         break
                     if ia in used_a or ib in used_b:
                         continue
+                    if near_duplicate_titles(pubs[pa_only[ia]]["title"], pubs[pb_only[ib]]["title"]):
+                        continue  # series instalments / editions of one work are not evidence of a new connection
                     terms = shared_terms(pa_only[ia], pb_only[ib], 5)
                     if len(terms) < 2:
                         continue
@@ -448,7 +491,7 @@ def main() -> None:
     per = Counter()
     kept = []
     for sgg in sorted(suggestions, key=lambda x: -x["score"]):
-        if per[sgg["researcherA"]] >= RES_TOP_K and per[sgg["researcherB"]] >= RES_TOP_K:
+        if per[sgg["researcherA"]] >= RES_TOP_K or per[sgg["researcherB"]] >= RES_TOP_K:
             continue
         per[sgg["researcherA"]] += 1
         per[sgg["researcherB"]] += 1
@@ -473,7 +516,7 @@ def main() -> None:
         "methodVersion": METHOD_VERSION,
         "parameters": {"pubTopK": PUB_TOP_K, "pubMinSim": PUB_MIN_SIM, "minDf": MIN_DF, "maxDf": max_df,
                        "researcherMinPubs": RES_MIN_PUBS, "researcherTopK": RES_TOP_K, "researcherMinSim": RES_MIN_SIM,
-                       "evidenceMinSim": EVIDENCE_MIN_SIM, "topics": k},
+                       "evidenceMinSim": EVIDENCE_MIN_SIM, "legalAreas": k, "areaVoteMinSim": AREA_VOTE_MIN_SIM, "areaVoteMinTotal": AREA_VOTE_MIN_TOTAL},
         "notes": [
             "Thematic similarity is TF-IDF keyword overlap on titles (+ abstracts/keywords when edoc provides them); it is a suggestion, not a collaboration.",
             "Coauthorship means both names appear on the same publication record in this snapshot.",
@@ -483,7 +526,15 @@ def main() -> None:
     for p in pubs:
         p.pop("listPosition", None)
     researchers = sorted(people.values(), key=lambda p: p["id"])
-    graph = {"meta": meta, "topics": topics,
+    edge_types = {
+        "author-of": {"method": "listed-author", "confidenceLabel": "observed",
+                      "evidenceBasis": "researcher appears in the publication's author list (edoc list when matched, else parsed citation)"},
+        "coauthorship": {"method": "shared-publication-record", "confidenceLabel": "observed",
+                         "evidenceBasis": "both appear in the author list of every publication in evidencePublicationIds"},
+        "thematic-similarity": {"method": METHOD_VERSION, "confidenceLabel": "derived suggestion",
+                                "evidenceBasis": "TF-IDF cosine of titles, plus edoc abstracts and keywords where available; sharedTerms lists the strongest common terms"},
+    }
+    graph = {"meta": meta, "edgeTypes": edge_types, "topics": topics,
              "concepts": {cid: lab for cid, (lab, _rx) in CONCEPTS.items()},
              "edges": edges, "suggestions": suggestions}
 
@@ -551,9 +602,10 @@ def main() -> None:
     cents = np.stack(cents)
     tsim = (cents @ cents.T).round(3).tolist()
     (ROOT / ".cache" / "layout-input.json").write_text(json.dumps({
-        "publications": [p["id"] for p in pubs], "topicOf": [int(labels[i]) if pubs[i]["topicId"] else -1 for i in range(n)],
+        "publications": [p["id"] for p in pubs], "topicOf": [int(labels[i]) for i in range(n)],
         "similarity": sim_by_pub, "topicSimilarity": tsim,
         "researchers": res_ids, "coauthorship": co,
+        "researcherPubCount": [len(people[r]["publicationIds"]) for r in res_ids],
         "researcherTopic": [Counter(pubs[pub_index[x]]["topicId"] for x in people[r]["publicationIds"]).most_common(1)[0][0] or "" for r in res_ids],
     }), "utf-8")
     print("coverage:", json.dumps({k: coverage[k] for k in ("unique", "sourceReportedTotal", "edges", "suggestions")}))

@@ -61,6 +61,12 @@ _COMPILED = [(cid, re.compile(rx)) for cid, (_label, rx) in CONCEPTS.items()]
 STOPWORDS = set("""
 a ab aber about across after against all allem allen aller alles als also am an and andere anderen ans any are as at auch auf aus aux avec bei beim between bis both but by can da dans das dass de dem den der des di die dies diese diesem diesen dieser dieses do does du durch e ein eine einem einen einer eines el en entre es et for from fur gegen hat i ihr ihre im in into is ist it its kann la le les mit nach neue neuen new nicht no not o ob oder of on or ou par pour sein seine sich sind so sous such sur than that the their them there these this those to uber um un und une unter vom von vor was we welche were what when which while who will with zu zum zur zwischen la los las del il dei della per che
 recht rechts rechte rechtliche rechtlichen rechtlicher law laws legal droit diritto juristische juristischen
+rezension rezensionen besprechung besprechungen anmerkung anmerkungen review reviews buchbesprechung note notes case cases
+artt supreme court courts gericht gerichts federal hauptteil werden wird wurde fall falle report rapport bger bvger
+kammer abteilung kantons kanton kantonsgericht kantonsgerichts artikel jahrbuch umfeld decision decisions comment comments private
+januar februar marz april mai juni juli august september oktober november dezember january february march june july october december
+under within towards allgemeine allgemeinen schweizerisches global article articles provision provisions zivil blick jahre jahr jahren keine kein grenzen munchen zurich bern geneve stadt tubingen berlin wien
+rechtsprechung jurisprudenz praxis practice zeitschrift journal beitrag beitrage contribution
 art arts abs ziff lit kommentar kommentierung kommentare commentaire commentary commentario einleitung vorbemerkungen vorbemerkung bemerkungen introduction
 schweiz schweizer schweizerische schweizerischen schweizerischer swiss suisse svizzera switzerland
 bund bundes bundesgesetz bundesgesetzes gesetz gesetzes act bundesgericht bundesgerichts bundesgerichtes entscheid entscheide urteil urteils urteile bge
@@ -88,16 +94,24 @@ def concept_label(cid: str) -> str:
 
 
 def analyse(text: str) -> tuple[list[str], dict[str, Counter]]:
-    """Return stemmed tokens (concepts included) and stem -> surface-form counts."""
+    """Return stemmed tokens (concepts included) and stem -> surface-form counts.
+
+    Raw words that a matched concept already covers (e.g. "datenschutz" when the
+    data-protection concept fired) are dropped so one idea is not counted twice."""
     f = fold(text)
     tokens: list[str] = []
     surfaces: dict[str, Counter] = {}
+    hit_rx = []
     for cid, rx in _COMPILED:
         hits = rx.findall(f)
         if hits:
             tokens.extend([cid] * min(len(hits), 2))
+            hit_rx.append(rx)
     for t in TOKEN_RE.findall(f):
         if t in STOPWORDS or t.isdigit() or re.fullmatch(r"\d+\w?", t):
+            continue
+        # a word already represented by a concept found in this text is not counted twice
+        if any(rx.fullmatch(t) for rx in hit_rx):
             continue
         s = stem(t)
         if s in STOPWORDS or len(s) < 4:

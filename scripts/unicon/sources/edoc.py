@@ -59,9 +59,8 @@ def _search(client: PoliteClient, query: str, budget: dict) -> list[dict]:
     if budget["used"] >= budget["max"]:
         raise BudgetExhausted
     url = qs(SEARCH, {"query": query, "dsoType": "ITEM", "size": PAGE_SIZE})
-    before = client.stats["network"]
     resp = client.request_json("GET", url)
-    budget["used"] += client.stats["network"] - before
+    budget["used"] += 1  # logical requests (network or cache) so the cap means the same on a resumed run
     sr = resp.get("_embedded", {}).get("searchResult", {})
     objs = sr.get("_embedded", {}).get("objects", [])
     return [o["_embedded"]["indexableObject"] for o in objs if o.get("_embedded")]
@@ -174,6 +173,7 @@ def enrich(client: PoliteClient, records: list[dict], max_requests: int, log=pri
         "source": "edoc.unibas.ch DSpace discovery search",
         "endpoint": SEARCH,
         "requestsUsed": budget["used"],
+        "requestsCountedAs": "logical requests including cache hits",
         "requestCap": max_requests,
         "capReached": exhausted,
         "matches": matches,

@@ -25,6 +25,7 @@ class PoliteClient:
         self.offline = offline
         self._last = 0.0
         self.stats = {"network": 0, "cache_hits": 0, "failures": 0}
+        self.last_fetched_at: str | None = None  # original fetch time of the last response (cache-aware)
 
     def _key(self, method: str, url: str, body: bytes | None) -> Path:
         h = hashlib.sha256(method.encode() + url.encode() + (body or b"")).hexdigest()[:24]
@@ -36,7 +37,9 @@ class PoliteClient:
         path = self._key(method, url, body)
         if use_cache and path.exists():
             self.stats["cache_hits"] += 1
-            return json.loads(path.read_text("utf-8"))["response"]
+            cached = json.loads(path.read_text("utf-8"))
+            self.last_fetched_at = cached.get("fetchedAt")
+            return cached["response"]
         if self.offline:
             raise RuntimeError(f"offline mode and no cache for {method} {url}")
         hdrs = {"User-Agent": USER_AGENT, "Accept": "application/json"}
@@ -54,9 +57,10 @@ class PoliteClient:
                 req = urllib.request.Request(url, data=body, method=method, headers=hdrs)
                 with urllib.request.urlopen(req, timeout=60) as resp:
                     data = json.loads(resp.read().decode("utf-8"))
+                self.last_fetched_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
                 path.write_text(json.dumps({
                     "method": method, "url": url, "payload": payload,
-                    "fetchedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                    "fetchedAt": self.last_fetched_at,
                     "response": data,
                 }, ensure_ascii=False), "utf-8")
                 return data
