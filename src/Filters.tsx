@@ -21,7 +21,7 @@ export function Filters({ data, filters, setFilters, selection, onSelect, visibl
   }, [data]);
   const unclustered = useMemo(() => data.publications.filter((p) => !p.topicId).length, [data]);
   const allTypes = filters.types.size === data.types.length;
-  const isDefault = allTypes && filters.yearMin === data.years[0] && filters.yearMax === data.years[1] && !filters.abstractsOnly;
+  const isDefault = allTypes && filters.faculties.size === 2 && filters.yearMin === data.years[0] && filters.yearMax === data.years[1] && !filters.abstractsOnly;
 
   return (
     <section className="filters" aria-labelledby="filters-h">
@@ -29,12 +29,22 @@ export function Filters({ data, filters, setFilters, selection, onSelect, visibl
         <h2 id="filters-h">Filter</h2>
         <span className="count" aria-live="polite">{visibleCount.toLocaleString("en")} shown</span>
         {!isDefault && (
-          <button type="button" className="link" onClick={() => setFilters({ yearMin: data.years[0], yearMax: data.years[1], types: new Set(data.types), abstractsOnly: false })}>
+          <button type="button" className="link" onClick={() => setFilters({ yearMin: data.years[0], yearMax: data.years[1], types: new Set(data.types), faculties: new Set(["law", "economics"]), abstractsOnly: false })}>
             Reset
           </button>
         )}
       </div>
       <YearBrush data={data} filters={filters} setFilters={setFilters} />
+      <fieldset className="faculties">
+        <legend>Faculty listing</legend>
+        {([['law', 'Law'], ['economics', 'Business and Economics']] as const).map(([key, label]) => <label className="check" key={key}>
+          <input type="checkbox" checked={filters.faculties.has(key)} onChange={(e) => {
+            const next = new Set(filters.faculties); if (e.target.checked) next.add(key); else next.delete(key);
+            setFilters({ ...filters, faculties: next });
+          }} /><span>{label}</span>
+        </label>)}
+        <p className="hint">Listing membership describes the source record, not a person's employment or discipline.</p>
+      </fieldset>
       <fieldset className="types">
         <legend>Publication type</legend>
         {data.types.map((t) => (
@@ -62,8 +72,8 @@ export function Filters({ data, filters, setFilters, selection, onSelect, visibl
         <span>Only publications with an abstract</span>
       </label>
       <div className="topics" aria-labelledby="topics-h">
-        <h3 id="topics-h">Legal areas</h3>
-        <p className="hint">Assigned from a published multilingual list of legal concepts found in titles, abstracts and keywords, or, more weakly, from the most similar classified publications.</p>
+        <h3 id="topics-h">Subject areas</h3>
+        <p className="hint">Direct labels come from a multilingual concept list. The primary colour is only a map projection; a publication may carry several labels.</p>
         <ul>
           {data.graph.topics.map((t) => {
             const on = selection?.kind === "topic" && selection.id === t.id;

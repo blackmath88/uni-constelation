@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bounded, resumable collection of Faculty of Law publications.
+"""Bounded, resumable collection of one approved faculty publication listing.
 
   python3 scripts/crawl.py --max-records 700          # README pilot bound
   python3 scripts/crawl.py --max-records 8000         # whole listing (~7.8k)
@@ -7,7 +7,7 @@
 
 Responses are cached in .cache/http (gitignored); re-running reuses the cache,
 so an interrupted crawl resumes without re-requesting finished pages.
-Writes data/raw/universe-listing.json and data/raw/edoc-enrichment.json.
+Writes faculty-scoped files so one crawl can never overwrite the other faculty.
 """
 from __future__ import annotations
 
@@ -25,6 +25,8 @@ from unicon.sources import edoc, universe  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 FACULTY_OF_LAW = "47838"
+FACULTY_OF_ECONOMICS = "47827"
+FACULTY_KEYS = {FACULTY_OF_LAW: "law", FACULTY_OF_ECONOMICS: "economics"}
 
 
 def main() -> None:
@@ -38,6 +40,10 @@ def main() -> None:
     ap.add_argument("--interval", type=float, default=1.0, help="seconds between requests")
     args = ap.parse_args()
 
+    if args.org_unit not in FACULTY_KEYS:
+        ap.error(f"org unit must be one of the approved faculties: {', '.join(FACULTY_KEYS)}")
+    faculty_key = FACULTY_KEYS[args.org_unit]
+
     client = PoliteClient(ROOT / ".cache" / "http", min_interval=args.interval, offline=args.offline)
     started = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     print(f"UNIverse org unit {args.org_unit}: collecting up to {args.max_records} records")
@@ -45,7 +51,8 @@ def main() -> None:
     listing["crawlStartedAt"] = started
     raw_dir = ROOT / "data" / "raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
-    (raw_dir / "universe-listing.json").write_text(json.dumps(listing, ensure_ascii=False, indent=1), "utf-8")
+    listing["facultyKey"] = faculty_key
+    (raw_dir / f"universe-listing-{faculty_key}.json").write_text(json.dumps(listing, ensure_ascii=False, indent=1), "utf-8")
     print(f"  {len(listing['records'])} unique records; stop: {listing['stopReason']}")
 
     if not args.skip_edoc:
@@ -63,7 +70,8 @@ def main() -> None:
         print(f"edoc enrichment (cap {args.max_edoc_requests} requests)")
         enr = edoc.enrich(client, recs, args.max_edoc_requests)
         enr["fetchedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        (raw_dir / "edoc-enrichment.json").write_text(json.dumps(enr, ensure_ascii=False, indent=1), "utf-8")
+        enr["facultyKey"] = faculty_key
+        (raw_dir / f"edoc-enrichment-{faculty_key}.json").write_text(json.dumps(enr, ensure_ascii=False, indent=1), "utf-8")
         print(f"  matched {len(enr['matches'])}, unresolved {len(enr['unresolved'])}, requests {enr['requestsUsed']}")
     print("http stats:", client.stats)
 

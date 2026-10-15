@@ -26,6 +26,13 @@ async function getJson<T>(name: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+let detailPromise: Promise<Record<string, Partial<Publication>>> | null = null;
+export async function loadPublicationDetail(p: Publication): Promise<Publication> {
+  detailPromise ??= getJson<Record<string, Partial<Publication>>>("publication-details.json");
+  const details = await detailPromise;
+  return { ...p, ...(details[p.id] ?? {}) };
+}
+
 export function fold(s: string): string {
   return s.normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss").toLowerCase();
 }
@@ -88,3 +95,7 @@ export async function loadDataset(): Promise<Dataset> {
 export function otherEnd(e: Edge, id: string) {
   return e.source === id ? e.target : e.source;
 }
+
+export const edgeHasVisibleEvidence = (e: Edge, visible: Set<string>) => e.evidencePublicationIds.some((id) => visible.has(id));
+export const suggestionHasVisibleEvidence = (s: Suggestion, visible: Set<string>) =>
+  s.evidence.some((e) => visible.has(e.publicationA) && visible.has(e.publicationB));

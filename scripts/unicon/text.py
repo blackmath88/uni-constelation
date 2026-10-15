@@ -55,6 +55,17 @@ CONCEPTS: dict[str, tuple[str, str]] = {
     "c_ethics": ("ethics", r"ethik\w*|ethic\w*|ethique|moral\w*"),
     "c_animal": ("animal law", r"tierschutz\w*|tierrecht\w*|animal\w*|\btiere?n?\b"),
     "c_sanctions": ("sanctions & sentencing", r"sanktion\w*|sanction\w*|strafzumessung\w*|sentencing|massnahme\w*|strafvollzug\w*|prison\w*|gefangnis\w*"),
+    "c_macro": ("macroeconomics", r"macroeconom\w*|makrookonom\w*|monetary polic\w*|geldpolitik\w*|inflation\w*|business cycle\w*|konjunktur\w*"),
+    "c_micro": ("microeconomics", r"microeconom\w*|mikrookonom\w*|game theor\w*|spieltheor\w*|consumer choice|konsumentenverhalten"),
+    "c_labourecon": ("labour economics", r"labou?r econom\w*|arbeitsmarkt\w*|wage\w*|lohne?\w*|unemployment|arbeitslos\w*|human capital"),
+    "c_development": ("development economics", r"development econom\w*|entwicklungsokonom\w*|economic development|poverty|armut\w*|low income countr\w*"),
+    "c_behavioral": ("behavioural economics", r"behavio\w+ econom\w*|verhaltensokonom\w*|decision making|entscheidungsverhalten|experiment\w* econom\w*"),
+    "c_econometrics": ("econometrics & causal inference", r"econometric\w*|okonometr\w*|causal inference|kausale inferenz|difference in differences|instrumental variable\w*|regression discontinuity"),
+    "c_publicecon": ("public economics", r"public econom\w*|finanzwissenschaft\w*|public finance|fiscal polic\w*|offentliche finanzen|taxation"),
+    "c_innovation": ("innovation & entrepreneurship", r"innovation\w*|entrepreneur\w*|unternehmertum|startup\w*|start up\w*|technological change"),
+    "c_management": ("management & organisations", r"management\w*|organization\w*|organisation\w*|leadership|fuhrung\w*|strategy|strategi\w*|governance"),
+    "c_accounting": ("accounting & corporate finance", r"accounting|rechnungslegung\w*|corporate finance|unternehmensfinanzierung|audit\w*|financial reporting"),
+    "c_tradeecon": ("international economics", r"international econom\w*|trade\w*|handel\w*|globali\w*|exchange rate\w*|wechselkurs\w*|foreign direct investment"),
 }
 _COMPILED = [(cid, re.compile(rx)) for cid, (_label, rx) in CONCEPTS.items()]
 

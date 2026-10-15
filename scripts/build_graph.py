@@ -3,9 +3,9 @@
 
   python3 scripts/build_graph.py
 
-Reads  data/raw/universe-listing.json, data/raw/edoc-enrichment.json (optional)
-Writes data/publications.json, data/researchers.json, data/graph.json,
-       data/coverage.json, .cache/layout-input.json (consumed by scripts/layout.mjs)
+Reads faculty-scoped listing and edoc files from data/raw/.
+Writes compact overview/detail data, researchers, graph, coverage, and the
+layout input consumed by scripts/layout.mjs.
 """
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from unicon.citation import INITIALS_RE, fold, parse_citation  # noqa: E402
+from unicon.combined import FACULTIES, load_and_combine  # noqa: E402
 from unicon.text import CONCEPTS, analyse, concept_label, detect_language  # noqa: E402
 
 CONCEPT_RX = {cid: re.compile(rx) for cid, (_l, rx) in CONCEPTS.items()}
@@ -29,6 +30,11 @@ CONCEPT_RX = {cid: re.compile(rx) for cid, (_l, rx) in CONCEPTS.items()}
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 METHOD_VERSION = "tfidf-cosine-v1"
+FEATURED_SUGGESTION_IDS = [
+    "s-r-56c694c9ab-r-ebe480b708",  # electronic money / euro e-banknotes; abstracts on both sides
+    "s-r-3dd97163a0-r-9945496884",  # trade, human rights and free trade; cross-language titles
+    "s-r-1b432483ad-r-782cb68d04",  # mobility choices / smart-mobility data governance
+]
 
 # Thematic similarity parameters (documented in docs/DATA_METHOD.md)
 PUB_TOP_K = 4
@@ -41,8 +47,10 @@ RES_MIN_SIM = 0.20
 EVIDENCE_MIN_SIM = 0.18
 AREA_VOTE_MIN_SIM = 0.22
 AREA_VOTE_MIN_TOTAL = 0.6
-# Broad legal areas, each a set of concept-lexicon entries (scripts/unicon/text.py)
-LEGAL_AREAS = [
+MAX_AUTHORS_FOR_PAIRWISE_COAUTHORSHIP = 50
+# Broad subject areas across both faculties. Publications also retain every directly
+# supported label in subjectLabels; topicId is only the primary layout projection.
+SUBJECT_AREAS = [
     ("Criminal law & procedure", ["c_criminal", "c_crimproc", "c_sanctions", "c_corruption"]),
     ("Public law & environment", ["c_const", "c_admin", "c_environment"]),
     ("Human rights & migration", ["c_humanrights", "c_migration"]),
@@ -56,6 +64,14 @@ LEGAL_AREAS = [
     ("Procedure, arbitration & liability", ["c_civproc", "c_arbitration", "c_liability"]),
     ("Tax, finance & insolvency", ["c_tax", "c_finance", "c_insolvency"]),
     ("Legal theory & history", ["c_legaltheory"]),
+    ("Macroeconomics & monetary policy", ["c_macro"]),
+    ("Microeconomics & decision theory", ["c_micro", "c_behavioral"]),
+    ("Labour & development economics", ["c_labourecon", "c_development"]),
+    ("Econometrics & causal inference", ["c_econometrics"]),
+    ("Public economics & policy", ["c_publicecon"]),
+    ("Innovation, management & organisations", ["c_innovation", "c_management"]),
+    ("Accounting & corporate finance", ["c_accounting", "c_finance"]),
+    ("International economics & trade", ["c_tradeecon", "c_trade"]),
 ]
 
 # edoc dc.type -> harmonised display category (raw edoc value kept as sourceType)
@@ -191,9 +207,7 @@ def display_term(term: str, surfaces: dict[str, Counter]) -> str:
 
 # ---------------------------------------------------------------- main
 def main() -> None:
-    listing = json.loads((DATA / "raw" / "universe-listing.json").read_text("utf-8"))
-    enr_path = DATA / "raw" / "edoc-enrichment.json"
-    enrichment = json.loads(enr_path.read_text("utf-8")) if enr_path.exists() else {"matches": {}, "unresolved": {}}
+    listing, enrichment, combine_report = load_and_combine(DATA)
     matches = enrichment["matches"]
 
     ids = Identities()
@@ -259,7 +273,10 @@ def main() -> None:
             else:
                 warnings.append(f"edoc DOI field is not a DOI: {item['doi'][:80]}")
         handle_url = rec["urls"].get("EDOC") or (f"https://hdl.handle.net/{item['handle']}" if item and item.get("handle") else None)
-        links = {"listing": listing["listingUrl"]}
+        source_records = rec.get("sourceRecords", [])
+        links = {f"listing-{x['faculty']}": x["listingUrl"] for x in source_records}
+        if source_records:
+            links["listing"] = source_records[0]["listingUrl"]
         if doi:
             links["doi"] = f"https://doi.org/{doi}"
         if handle_url:
@@ -290,7 +307,12 @@ def main() -> None:
             "language": lang,
             "languageSource": lang_source,
             "edocMatch": {"method": match["method"], "confidence": match["confidence"], "handle": item.get("handle")} if match else None,
-            "facultyScope": "Listed under Faculty of Law (UNIverse org unit 47838)",
+            "facultyMemberships": rec.get("facultyMemberships", ["law"]),
+            "facultyScope": "; ".join(
+                f"Listed under Faculty of {FACULTIES[x]['label']} (UNIverse org unit {FACULTIES[x]['orgUnitId']})"
+                for x in rec.get("facultyMemberships", ["law"])
+            ),
+            "sourceRecords": source_records,
             "listPosition": rec["listPosition"],
             "parseWarnings": warnings,
         }
@@ -309,10 +331,10 @@ def main() -> None:
     print(f"vocabulary: {len(vocab)} terms (min df {MIN_DF}, max df {max_df})")
     empty = int((np.abs(mat).sum(1) == 0).sum())
 
-    # ---------------- topics: legal areas from the concept lexicon, nearest-centroid fallback
-    k = len(LEGAL_AREAS)
+    # ---------------- subjects: multi-label concepts plus a primary layout projection
+    k = len(SUBJECT_AREAS)
     cidx = {t: i for i, t in enumerate(vocab) if t.startswith("c_")}
-    area_cols = [[cidx[c] for c in concepts if c in cidx] for _name, concepts in LEGAL_AREAS]
+    area_cols = [[cidx[c] for c in concepts if c in cidx] for _name, concepts in SUBJECT_AREAS]
     labels = np.full(n, -1)
     basis: list[str | None] = [None] * n
     for i in range(n):
@@ -337,7 +359,7 @@ def main() -> None:
                 labels[i], basis[i] = j, "similar classified publications"
     global_mean = mat.mean(0)
     topics = []
-    for j, (name, concepts) in enumerate(LEGAL_AREAS):
+    for j, (name, concepts) in enumerate(SUBJECT_AREAS):
         members = mat[labels == j]
         centroid = members.mean(0) if len(members) else global_mean
         distinct = centroid - global_mean
@@ -348,7 +370,14 @@ def main() -> None:
     for i, p in enumerate(pubs):
         p["topicId"] = f"t{labels[i]}" if labels[i] >= 0 else None
         p["topicBasis"] = basis[i]
-    print(f"topics: {k} legal areas; basis {dict(Counter(basis))}")
+        direct = [f"t{j}" for j, cols in enumerate(area_cols) if cols and float(mat[i, cols].sum()) > 0]
+        p["subjectLabels"] = direct
+        p["interpretation"] = {
+            "subjects": [{"topicId": x, "evidenceFields": ["title", "abstract", "keywords"],
+                          "method": "multilingual concept lexicon"} for x in direct],
+            "researchQuestion": None, "method": None, "context": None, "disciplinaryPerspective": None,
+        }
+    print(f"topics: {k} cross-faculty subject areas; basis {dict(Counter(basis))}")
 
     # ---------------- publication similarity (sparse top-k)
     sim_edges = []
@@ -409,11 +438,15 @@ def main() -> None:
 
     # coauthorship + author-of
     pair_pubs: dict[tuple[str, str], list[str]] = defaultdict(list)
+    hyperauthored = []
     for p in pubs:
         rids = sorted({a["researcherId"] for a in p["authors"]})
-        for x in range(len(rids)):
-            for y in range(x + 1, len(rids)):
-                pair_pubs[(rids[x], rids[y])].append(p["id"])
+        if len(rids) <= MAX_AUTHORS_FOR_PAIRWISE_COAUTHORSHIP:
+            for x in range(len(rids)):
+                for y in range(x + 1, len(rids)):
+                    pair_pubs[(rids[x], rids[y])].append(p["id"])
+        else:
+            hyperauthored.append({"publicationId": p["id"], "authorCount": len(rids)})
         for r in rids:
             edges.append({"source": r, "target": p["id"], "type": "author-of", "evidencePublicationIds": [p["id"]]})
     for (a, b), plist in sorted(pair_pubs.items()):
@@ -466,6 +499,11 @@ def main() -> None:
                         continue
                     if near_duplicate_titles(pubs[pa_only[ia]]["title"], pubs[pb_only[ib]]["title"]):
                         continue  # series instalments / editions of one work are not evidence of a new connection
+                    fa = set(pubs[pa_only[ia]]["facultyMemberships"])
+                    fb = set(pubs[pb_only[ib]]["facultyMemberships"])
+                    if not (("law" in fa and "economics" not in fa and "economics" in fb and "law" not in fb) or
+                            ("economics" in fa and "law" not in fa and "law" in fb and "economics" not in fb)):
+                        continue  # shared records and same-faculty evidence cannot manufacture a faculty bridge
                     terms = shared_terms(pa_only[ia], pb_only[ib], 5)
                     if len(terms) < 2:
                         continue
@@ -483,9 +521,15 @@ def main() -> None:
                     "id": f"s-{a}-{b}", "researcherA": a, "researcherB": b, "score": round(s, 3),
                     "sharedTerms": top_terms, "evidence": evidence, "type": "thematic-similarity",
                     "method": METHOD_VERSION, "confidenceLabel": "derived suggestion",
+                    "sharedSubject": top_terms[:3], "facultyBridge": ["law", "economics"],
+                    "evidenceCoverage": {
+                        "pairs": len(evidence),
+                        "withAbstractOnBothSides": sum(bool(pubs[pub_index[x["publicationA"]]]["abstract"] and
+                                                            pubs[pub_index[x["publicationB"]]]["abstract"]) for x in evidence),
+                    },
                     "absenceNote": "No joint publication in this snapshot.",
-                    "question": (f"Suggested conversation starter: how do your approaches to "
-                                 f"{top_terms[0]}{' and ' + top_terms[1] if len(top_terms) > 1 else ''} compare?"),
+                    "question": (f"A question to investigate: how does {top_terms[0]} appear in each publication's framing?"
+                                 if top_terms else None),
                 })
     # keep top-k per researcher
     per = Counter()
@@ -509,14 +553,14 @@ def main() -> None:
     snapshot = max(r["fetchedAt"] for r in listing["records"])[:10] if listing["records"] else None
     years = [p["year"] for p in pubs if p["year"]]
     meta = {
-        "title": "Uni Constellation — Faculty of Law public-data pilot",
+        "title": "Uni Constellation — Law × Economics public-data pilot",
         "snapshotDate": snapshot,
         "publicationCount": n,
         "researcherCount": len(people),
         "methodVersion": METHOD_VERSION,
         "parameters": {"pubTopK": PUB_TOP_K, "pubMinSim": PUB_MIN_SIM, "minDf": MIN_DF, "maxDf": max_df,
                        "researcherMinPubs": RES_MIN_PUBS, "researcherTopK": RES_TOP_K, "researcherMinSim": RES_MIN_SIM,
-                       "evidenceMinSim": EVIDENCE_MIN_SIM, "legalAreas": k, "areaVoteMinSim": AREA_VOTE_MIN_SIM, "areaVoteMinTotal": AREA_VOTE_MIN_TOTAL},
+                       "evidenceMinSim": EVIDENCE_MIN_SIM, "subjectAreas": k, "areaVoteMinSim": AREA_VOTE_MIN_SIM, "areaVoteMinTotal": AREA_VOTE_MIN_TOTAL},
         "notes": [
             "Thematic similarity is TF-IDF keyword overlap on titles (+ abstracts/keywords when edoc provides them); it is a suggestion, not a collaboration.",
             "Coauthorship means both names appear on the same publication record in this snapshot.",
@@ -536,14 +580,23 @@ def main() -> None:
     }
     graph = {"meta": meta, "edgeTypes": edge_types, "topics": topics,
              "concepts": {cid: lab for cid, (lab, _rx) in CONCEPTS.items()},
-             "edges": edges, "suggestions": suggestions}
+             "edges": edges, "suggestions": suggestions,
+             "featuredSuggestionIds": [x for x in FEATURED_SUGGESTION_IDS if any(s["id"] == x for s in suggestions)]}
 
     abstracts = sum(1 for p in pubs if p["abstract"])
     coverage = {
-        "sources": [
-            {"name": listing["source"], "url": listing["listingUrl"], "endpoint": listing["endpoint"]},
-            {"name": enrichment.get("source", "edoc"), "url": "https://edoc.unibas.ch", "endpoint": enrichment.get("endpoint")},
-        ],
+        "sources": [{"faculty": x["facultyKey"], "name": x["source"], "url": x["listingUrl"],
+                     "endpoint": x["endpoint"], "orgUnitId": x["orgUnitId"]} for x in listing["sources"]] +
+                   [{"name": "edoc", "url": "https://edoc.unibas.ch"}],
+        "sourceCoverage": {
+            x["facultyKey"]: {"orgUnitId": x["orgUnitId"], "reportedTotal": x.get("reportedTotal"),
+                              "unique": len(x["records"]), "stopReason": x.get("stopReason"),
+                              "complete": len(x["records"]) >= (x.get("reportedTotal") or 10**12),
+                              "pagesFailed": len([p for p in x.get("pages", []) if "error" in p])}
+            for x in listing["sources"]
+        },
+        "overlap": sum(len(p["facultyMemberships"]) > 1 for p in pubs),
+        "combination": combine_report,
         "retrievalStarted": listing.get("crawlStartedAt"),
         "snapshotDate": snapshot,
         "sourceReportedTotal": listing["reportedTotal"],
@@ -565,8 +618,9 @@ def main() -> None:
             "matched": len(matches), "byMethod": dict(Counter(m["method"] for m in matches.values())),
             "unresolved": len(enrichment.get("unresolved", {})),
             "unresolvedReasons": dict(Counter(enrichment.get("unresolved", {}).values()).most_common()),
-            "requestsUsed": enrichment.get("requestsUsed"), "requestCap": enrichment.get("requestCap"),
-            "capReached": enrichment.get("capReached"),
+            "requestsUsed": sum(x.get("requestsUsed", 0) for x in enrichment.get("sources", [])),
+            "requestCap": sum(x.get("requestCap", 0) for x in enrichment.get("sources", [])),
+            "capReached": any(x.get("capReached", False) for x in enrichment.get("sources", [])),
         },
         "incompleteAuthorLists": sum(1 for p in pubs if not p["authorsComplete"]),
         "publicationsWithParseWarnings": sum(1 for p in pubs if p["parseWarnings"]),
@@ -575,16 +629,27 @@ def main() -> None:
         "unresolvedIdentities": sum(1 for p in researchers if p["identityStatus"] != "edoc-person-record"),
         "edges": dict(Counter(e["type"] for e in edges)),
         "suggestions": len(suggestions),
+        "hyperauthoredPublications": hyperauthored,
         "knownExclusions": [
-            "Only the Faculty of Law org-unit listing (47838); other faculties are out of scope.",
+            "Only the Law (47838) and Business and Economics (47827) org-unit listings are in scope.",
+            "Faculty listing membership is not evidence of a person's current employment or discipline.",
             "No full texts, reference lists or citation links were collected.",
             "No ORCID enrichment in this slice.",
             "Records not found in edoc have only citation-derived authors, types and no abstracts.",
             "Author lists shortened with 'et al.' are incomplete unless edoc provides the full list.",
+            f"Publications with more than {MAX_AUTHORS_FOR_PAIRWISE_COAUTHORSHIP} authors keep author-of evidence but are not expanded into all pairwise coauthor edges.",
         ],
     }
     write = lambda name, obj: (DATA / name).write_text(json.dumps(obj, ensure_ascii=False, separators=(",", ":")), "utf-8")
-    write("publications.json", pubs)
+    detail_fields = ("abstract", "rawCitation", "links", "sourceRecords", "parseWarnings", "edocMatch", "container")
+    publication_details = {p["id"]: {k: p[k] for k in detail_fields} for p in pubs}
+    overview_pubs = []
+    for p in pubs:
+        q = {k: v for k, v in p.items() if k not in detail_fields}
+        q["hasAbstract"] = bool(p["abstract"])
+        overview_pubs.append(q)
+    write("publications.json", overview_pubs)
+    write("publication-details.json", publication_details)
     write("researchers.json", researchers)
     write("graph.json", graph)
     (DATA / "coverage.json").write_text(json.dumps(coverage, ensure_ascii=False, indent=2), "utf-8")
@@ -601,6 +666,7 @@ def main() -> None:
         cents.append(v / (np.linalg.norm(v) or 1))
     cents = np.stack(cents)
     tsim = (cents @ cents.T).round(3).tolist()
+    (ROOT / ".cache").mkdir(parents=True, exist_ok=True)
     (ROOT / ".cache" / "layout-input.json").write_text(json.dumps({
         "publications": [p["id"] for p in pubs], "topicOf": [int(labels[i]) for i in range(n)],
         "similarity": sim_by_pub, "topicSimilarity": tsim,

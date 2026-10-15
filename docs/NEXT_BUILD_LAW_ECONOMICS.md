@@ -1,6 +1,6 @@
 # Next build: Law × Economics discovery journey
 
-Status: implementation brief approved by the requester on 2026-10-15.
+Status: implemented and validated on the PR branch on 2026-10-15. Concrete results are recorded in `README.md`, `DATA_METHOD.md`, `CANDIDATE_REVIEW.md`, and `VALIDATION.md`.
 Continue the existing implementation on `claude/focused-carson-kpli3c` / PR #1. This is an implementation task: build, validate and update the existing PR, rather than returning only a plan. Do not merge or deploy.
 
 ## Outcome

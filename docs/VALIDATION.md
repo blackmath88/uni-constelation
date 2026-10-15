@@ -1,89 +1,59 @@
 # Validation
 
-Results for the committed snapshot (2026-10-15). Commands: `npm test` (unit + data contract) and `npm run test:e2e` (browser).
+Results for the combined snapshot built and reviewed on 2026-10-15.
 
-## Data contract — `scripts/validate.py`
+## Collection and combination
 
-```
-validated 7807 publications, 1672 researchers, 35817 edges, 192 suggestions
+- Law: 7,807/7,807 records, 16 listing pages, no failed page, complete.
+- Business and Economics: 3,127/3,127, 7 pages, no failed page, complete.
+- One shared UNIverse ID; 10,933 combined unique records; both memberships/source records retained.
+- 9,153 edoc matches: 9,110 handle, 4 DOI, 39 conservative title+year+author. 2,742 abstracts (25.1%).
+- 361 total logical edoc requests; no cap reached. Economics collection used 114 network requests total and no failures.
+- No record/enrichment conflicts. Identifier collisions on distinct UNIverse IDs are listed in `coverage.json` and deliberately remain separate.
+
+## Automated checks
+
+`npm test` under the NumPy environment runs 8 unit tests: 11 citation cases as subtests, identity rules, shared-ID combination/provenance, and explicit missing-source reporting. `scripts/validate.py` reports:
+
+```text
+validated 10933 publications, 8242 researchers, 74236 edges, 32 suggestions
 OK: no dangling references; all relationships carry evidence
 ```
 
-Checks:
+Validation additionally asserts every suggestion's evidence is an exclusive Law↔Economics publication pair. Two consecutive graph/layout builds are byte-identical. The clean-checkout CI failure was reproduced from run `38780272746`: `.cache/layout-input.json` was written before its parent existed. `build_graph.py` now creates `.cache/` before writing.
 
-- no duplicate publication, researcher or source-record IDs
-- all required publication fields present
-- every author resolves to a researcher, and every researcher's `publicationIds` resolve and list them as an author
-- researcher IDs are local (`r-…`); `sourcePersonId` only `edoc-authority:<uuid>`; no ORCID values are invented (all `null`)
-- abstracts only with `abstractSource: "edoc"`; DOIs match `10.xxxx/…`
-- every edge endpoint exists, every edge carries `evidencePublicationIds`, and every edge type is defined in `edgeTypes`
-- each coauthorship edge's two people both appear on every cited publication
-- coauthorship and author-of are labelled *observed*; thematic similarity is labelled *derived suggestion*
-- each suggestion pairs two existing researchers who are **not** coauthors in the snapshot, cites evidence publications authored by each side with ≥ 2 shared terms, says "No joint publication in this snapshot.", and labels its question as a suggestion
-- every publication has a layout position; coverage counts match the files
+`npm run build` passes TypeScript and Vite production compilation. Initial production JSON is 2.81 MiB gzip; publication details are 2.41 MiB gzip and lazy-loaded. Uncompressed build measurements are recorded by Vite: graph 10.16 MB, overview publications 12.16 MB, researchers 2.17 MB, layout 0.41 MB, details 11.89 MB.
 
-## Parser and identity fixtures — `tests/test_citation.py`
+Playwright against the production preview:
 
-There are 11 real citation fixtures from the listing (`tests/fixtures/citations.json`). They cover:
-
-- *et al.* truncation
-- initials-only names
-- accents and HTML entities
-- a DOI field holding a handle URL, which is rejected as a DOI
-- missing identifiers
-- literal "Given Family" names, mixed literal and inverted lists, and double family names
-- editors
-- a missing year
-- journal / chapter / commentary / book / thesis types
-
-Identity tests check four rules:
-
-- `S. Gless` ≠ `Sabine Gless`
-- `Gless, Sabine` = `Sabine Gless`
-- an edoc authority absorbs an exact full name but not initials
-- two different authorities with the same name stay separate, and a plain-name occurrence joins neither
-
-Result: `Ran 6 tests … OK` (fixture cases run as sub-tests).
-
-## Reproducibility
-
-- **Resume:** re-running `python3 scripts/crawl.py --max-records 8000 --max-edoc-requests 600 --offline` used 0 network requests and 270 cache hits, and reproduced the same 7,807 records and 6,526 edoc matches with the original fetch timestamps.
-- **Deterministic build:** two consecutive `build_graph.py` + `layout.mjs` runs produce byte-identical `data/` (`diff -r` clean). CI repeats this check on its runner.
-- **Static build:** `vite build` emits `dist/` with base `/uni-constelation/` and copies only the five app JSON files (no `data/raw`). No secrets or environment variables are used.
-
-## Browser tests — Playwright against the production build (`vite preview`, `/uni-constelation/`)
-
-```
-✓ [desktop] loads the static build with the snapshot framing and a rendered map
-✓ [mobile]  mobile layout: map on top, tabbed panels, no horizontal overflow
-✓ [desktop] find a researcher, inspect their work and open a publication
-✓ [desktop] follow a suggested connection and see why it appears
-✓ [desktop] switch relationship mode and keep the label clear
-✓ [desktop] filters preserve selection and show an empty state
-✓ [desktop] list view works without the graph and topics are selectable
-✓ [desktop] map responds to clicks and keyboard zoom
-8 passed
+```text
+10 passed
+desktop: framing/map; search→researcher→publication/source; comparison evidence/source links;
+mode labels; empty filters; list/subject; faculty+year URL restoration and evidence gating;
+invalid deep link; unavailable abstract; canvas click and keyboard controls
+mobile Pixel 7: map, panel tabs, comparison, filters, zero horizontal overflow
 ```
 
-No page errors were logged in any flow. Time from navigation to rendered map: about 0.6–1.1 s locally (1440×900 and Pixel-class 393×851).
+The faculty-only filter produces zero cross-faculty suggestions. Narrowing the period reduces `data-visible-coauthor-edges`, proving coauthor lines require in-filter shared evidence. Reload restores encoded period/faculty/type/abstract filters.
 
-## Visual inspection
+## Discovery-quality review
 
-The screenshots in `docs/screenshots/` were rendered from the production preview and reviewed. Issues found during review and fixed before commit:
+Twenty real candidates were reviewed in [CANDIDATE_REVIEW.md](CANDIDATE_REVIEW.md), with the same publication evidence scored by TF-IDF and multilingual embeddings. Results: 13 useful, 3 obvious, 3 misleading, 1 insufficient. The review includes cross-language, missing-abstract and generic-term failures. It explicitly searched for series/edition and namesake issues; no obvious namesake appeared in the 20, but this is not identity validation. Three useful examples were selected for the opening list. This is implementer review, not independent faculty-expert assessment.
 
-- Tabular figures in Schibsted Grotesk widened punctuation ("7 ,807"), so `tnum` is limited to years.
-- Area labels collided or ran off the canvas. They are now placed greedily, nudged vertically and clamped to the view, with ink text and a colour dot (yellow text was unreadable).
-- Unsupervised clusters produced blended, misleading labels. They were replaced by lexicon-based legal areas with a disclosed fallback and grey "not assigned".
-- The top suggestions were dominated by yearly series and new editions of the same work. These are now excluded as evidence, and duplicate concept/raw terms are no longer counted twice.
-- Prolific researchers collected up to 10 suggestions. The cap is now 3 per person.
-- Searching "Gless" ranked a single-name record above "Sabine Gless". Ranking now prefers name-word starts, then edoc-linked identities.
-- Two name labels for a suggested pair overlapped, and coauthor hubs were cluttered with labels. Labels are now nudged apart, and only the top 10 coauthors are labelled.
-- In coauthorship mode, a researcher without coauthors left the map blank. An explicit notice now explains why.
-- Mobile: no horizontal overflow (asserted in the test); panels sit in tabs under the map.
+## Visual evidence
 
-## Not verified
+Fresh screenshots captured by the passing production-browser suite and visually inspected:
 
-- Behaviour on GitHub Pages itself (no deployment was made).
-- Screen-reader output was not tested with assistive technology. ARIA roles and labels, visible focus and the list view are in place.
-- Dark mode is implemented with `prefers-color-scheme` tokens but was not screenshot-reviewed.
-- Correctness of individual edoc author lists and types is taken from the source.
+| Desktop overview | Cross-faculty evidence | Pixel 7 |
+|---|---|---|
+| ![Combined overview](screenshots/law-economics-overview.png) | ![Comparison](screenshots/law-economics-comparison.png) | ![Mobile](screenshots/law-economics-mobile.png) |
+
+The desktop overview has clear faculty filters, optional walkthrough, subject labels, legend and provenance caveat. The comparison keeps both publications and source links visible. On mobile, topic labels are hidden to prevent cluster-label collisions; selected people remain labelled. No horizontal overflow was observed.
+
+## Remaining limitations
+
+- No independent faculty-expert, screen-reader or dark-mode visual review.
+- 74.9% of records lack abstracts; keyword and semantic retrieval may overvalue titles.
+- Name-only identity ambiguity remains; current employment and discipline are not inferred.
+- The 2.81 MiB gzip initial overview is improved but still material on slow mobile links.
+- No deployment or GitHub Pages environment was tested.

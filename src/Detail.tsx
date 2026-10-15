@@ -1,11 +1,11 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Dataset } from "./data";
-import { fold, otherEnd } from "./data";
+import { fold, loadPublicationDetail, otherEnd } from "./data";
 import { topicColor } from "./colors";
 import { ConversationItem } from "./Conversations";
 import type { Publication, Researcher, Selection } from "./types";
 
-interface Props { data: Dataset; selection: Selection; onSelect: (s: Selection) => void; onClose: () => void }
+interface Props { data: Dataset; selection: Selection; visiblePubs: Set<string>; onSelect: (s: Selection) => void; onClose: () => void }
 
 const IDENTITY_TEXT: Record<Researcher["identityStatus"], string> = {
   "edoc-person-record": "Linked to a person record in edoc (University of Basel repository). This shows a repository identity, not current employment.",
@@ -14,12 +14,12 @@ const IDENTITY_TEXT: Record<Researcher["identityStatus"], string> = {
   "single-name": "Only a single name is given in the source citation.",
 };
 
-export function Detail({ data, selection, onSelect, onClose }: Props) {
+export function Detail({ data, selection, visiblePubs, onSelect, onClose }: Props) {
   let body: ReactNode;
   if (!selection) body = <About data={data} />;
   else if (selection.kind === "publication") body = <PublicationDetail data={data} id={selection.id} onSelect={onSelect} />;
   else if (selection.kind === "researcher") body = <ResearcherDetail data={data} id={selection.id} onSelect={onSelect} selection={selection} />;
-  else if (selection.kind === "suggestion") body = <SuggestionDetail data={data} id={selection.id} onSelect={onSelect} />;
+  else if (selection.kind === "suggestion") body = <SuggestionDetail data={data} id={selection.id} visiblePubs={visiblePubs} onSelect={onSelect} />;
   else body = <TopicDetail data={data} id={selection.id} onSelect={onSelect} />;
   return (
     <aside className="detail" aria-label="Details" data-testid="detail">
@@ -61,13 +61,16 @@ function PubRow({ p, onSelect, extra }: { p: Publication; onSelect: (s: Selectio
 }
 
 function PublicationDetail({ data, id, onSelect }: { data: Dataset; id: string; onSelect: (s: Selection) => void }) {
-  const p = data.pubById.get(id);
+  const base = data.pubById.get(id);
+  const [loaded, setLoaded] = useState<Publication | null>(null);
   const [showRaw, setShowRaw] = useState(false);
-  if (!p) return <p className="muted">This publication is not in the snapshot.</p>;
+  useEffect(() => { setLoaded(null); if (base) loadPublicationDetail(base).then(setLoaded); }, [base]);
+  if (!base) return <p className="muted">This publication is not in the snapshot.</p>;
+  const p = loaded ?? base;
   const related = (data.similarByPub.get(p.id) ?? []).slice(0, 6);
   const topic = p.topicId ? data.topicById.get(p.topicId) : null;
   const missing: string[] = [];
-  if (!p.abstract) missing.push(p.edocMatch ? "edoc has no abstract for this record." : "No abstract: the record was not matched in edoc, so only the citation is available.");
+  if (!p.hasAbstract) missing.push(p.edocMatch ? "edoc has no abstract for this record." : "No abstract: the record was not matched in edoc, so only the citation is available.");
   if (!p.authorsComplete) missing.push("Author list is incomplete (“et al.” in the source citation). Missing coauthors are not inferred.");
   if (p.year == null) missing.push("No publication year in the source citation.");
   if (p.publicationTypeSource !== "edoc") missing.push("Publication type is inferred from the citation format.");
@@ -97,9 +100,9 @@ function PublicationDetail({ data, id, onSelect }: { data: Dataset; id: string; 
       ) : null}
       {p.keywords.length > 0 && <p className="keywords"><span className="label">Keywords</span> {p.keywords.join(", ")}</p>}
       <div className="links">
-        {p.links.doi && <a href={p.links.doi} target="_blank" rel="noreferrer">DOI {p.doi}</a>}
-        {p.links.edoc && <a href={p.links.edoc} target="_blank" rel="noreferrer">edoc record</a>}
-        <a href={p.links.listing} target="_blank" rel="noreferrer">UNIverse faculty listing</a>
+        {p.links?.doi && <a href={p.links.doi} target="_blank" rel="noreferrer">DOI {p.doi}</a>}
+        {p.links?.edoc && <a href={p.links.edoc} target="_blank" rel="noreferrer">edoc record</a>}
+        {(p.sourceRecords ?? []).map((s) => <a key={s.faculty} href={s.listingUrl} target="_blank" rel="noreferrer">UNIverse {s.faculty === "law" ? "Law" : "Economics"} listing</a>)}
       </div>
       {missing.length > 0 && (
         <div className="notes" role="note">
@@ -109,7 +112,7 @@ function PublicationDetail({ data, id, onSelect }: { data: Dataset; id: string; 
       )}
       {topic && (
         <p className="topic-line">
-          Legal area: <button type="button" className="link" onClick={() => onSelect({ kind: "topic", id: topic.id })}>{topic.label}</button>
+          Primary subject projection: <button type="button" className="link" onClick={() => onSelect({ kind: "topic", id: topic.id })}>{topic.label}</button>
           {p.topicBasis === "similar classified publications" && <span className="muted"> (assigned from similar publications; weaker evidence)</span>}
         </p>
       )}
@@ -136,7 +139,7 @@ function PublicationDetail({ data, id, onSelect }: { data: Dataset; id: string; 
               <dt>Authors from</dt><dd>{p.authorsSource === "edoc" ? "edoc author list" : "parsed citation"}</dd>
               <dt>edoc match</dt><dd>{p.edocMatch ? `${p.edocMatch.method} (${p.edocMatch.confidence} confidence)` : "none"}</dd>
               <dt>Fetched</dt><dd>{p.fetchedAt}</dd>
-              {p.parseWarnings.length > 0 && <><dt>Parse warnings</dt><dd>{p.parseWarnings.join("; ")}</dd></>}
+              {(p.parseWarnings?.length ?? 0) > 0 && <><dt>Parse warnings</dt><dd>{p.parseWarnings!.join("; ")}</dd></>}
             </dl>
           </div>
         )}
@@ -165,6 +168,7 @@ function ResearcherDetail({ data, id, onSelect, selection }: { data: Dataset; id
       <p className="identity">{IDENTITY_TEXT[r.identityStatus]}</p>
       {r.nameVariants.length > 1 && <p className="muted small">Name forms in the source: {r.nameVariants.join("; ")}</p>}
       <p className="stat">Author on {pubs.length} faculty-listed publication{pubs.length === 1 ? "" : "s"} in this snapshot.</p>
+      <p className="scope-note">Full-snapshot context: this panel is not recomputed as a time-specific profile.</p>
       {topics.length > 0 && (
         <div className="topic-bar" role="img" aria-label={`Topic mix: ${topics.map(([t, n]) => `${data.topicById.get(t)?.label} ${n}`).join("; ")}`}>
           {topics.map(([t, n]) => (
@@ -227,10 +231,12 @@ function highlightTerms(text: string, terms: string[]): ReactNode {
   });
 }
 
-function SuggestionDetail({ data, id, onSelect }: { data: Dataset; id: string; onSelect: (s: Selection) => void }) {
+function SuggestionDetail({ data, id, visiblePubs, onSelect }: { data: Dataset; id: string; visiblePubs: Set<string>; onSelect: (s: Selection) => void }) {
   const s = data.suggestionById.get(id);
   if (!s) return <p className="muted">This suggestion is not in the snapshot.</p>;
   const A = data.resById.get(s.researcherA)!, B = data.resById.get(s.researcherB)!;
+  const evidence = s.evidence.filter((e) => visiblePubs.has(e.publicationA) && visiblePubs.has(e.publicationB));
+  if (!evidence.length) return <article><h2 className="detail-title">This comparison is outside the active filters</h2><p>Widen the filters to restore its supporting publications. The URL keeps the comparison selected.</p></article>;
   return (
     <article className="why">
       <div className="kicker">Possible conversation · derived suggestion</div>
@@ -241,13 +247,13 @@ function SuggestionDetail({ data, id, onSelect }: { data: Dataset; id: string; o
       </h2>
       <p className="absence">{s.absenceNote}</p>
       <section>
-        <h3>Why this connection?</h3>
+        <h3>Why explore this connection?</h3>
         <p>
           Their publications in this snapshot share these terms: <strong>{s.sharedTerms.join(", ")}</strong>.
-          The profile similarity is {s.score.toFixed(2)} (cosine of TF-IDF term profiles, 0–1).
+          Retrieval used TF-IDF cosine; the value {s.score.toFixed(2)} ranks candidates and is not a probability of useful collaboration.
         </p>
         <ol className="evidence">
-          {s.evidence.map((ev, i) => {
+          {evidence.map((ev, i) => {
             const pa = data.pubById.get(ev.publicationA)!, pb = data.pubById.get(ev.publicationB)!;
             return (
               <li key={i} className="evidence-pair">
@@ -265,7 +271,7 @@ function SuggestionDetail({ data, id, onSelect }: { data: Dataset; id: string; o
         <h3>How this was derived</h3>
         <p>
           Each publication is represented by the terms in its title, plus its abstract and keywords when edoc provides them.
-          German, English and French legal phrases are mapped to shared concepts with a small published lexicon, and broad words
+          German, English and French legal and economics phrases are mapped to shared concepts with a published lexicon, and broad words
           such as “Recht”, “law” or “Kommentar” are ignored. Each researcher's profile is the average of their publications,
           so writing more does not make a profile stronger. A pair is only shown when at least one pair of publications
           shares two or more specific terms.
@@ -274,7 +280,8 @@ function SuggestionDetail({ data, id, onSelect }: { data: Dataset; id: string; o
           This is keyword overlap, not an assessment of research quality or of whether the two people know each other.
         </p>
       </section>
-      <p className="question">{s.question}</p>
+      {s.question && <p className="question">{s.question}</p>}
+      <button type="button" className="copy-link" onClick={() => navigator.clipboard.writeText(location.href)}>Copy comparison link</button>
     </article>
   );
 }
@@ -284,7 +291,8 @@ function EvidencePub({ p, who, terms, onSelect }: { p: Publication; who: string;
     <div className="ev-pub">
       <div className="ev-who">{who}</div>
       <button type="button" className="pub-link" onClick={() => onSelect({ kind: "publication", id: p.id })}>{highlightTerms(p.title, terms)}</button>
-      <div className="pub-meta">{p.year ?? "n.d."} · {p.publicationType}{p.abstract ? " · abstract available" : ""}</div>
+      <div className="pub-meta">{p.year ?? "n.d."} · {p.publicationType}{p.hasAbstract ? " · abstract available" : ""}</div>
+      <a className="source-mini" href={p.sourceUrl} target="_blank" rel="noreferrer">Open source record</a>
     </div>
   );
 }
@@ -300,7 +308,7 @@ function TopicDetail({ data, id, onSelect }: { data: Dataset; id: string; onSele
   if (!t) return null;
   return (
     <article className="topic-detail">
-      <div className="kicker"><span className="swatch" style={{ background: topicColor(t.id) }} aria-hidden="true" />Legal area</div>
+      <div className="kicker"><span className="swatch" style={{ background: topicColor(t.id) }} aria-hidden="true" />Subject area</div>
       <h2 className="detail-title">{t.label}</h2>
       <p>{t.size.toLocaleString("en")} publications. Frequent terms here: {t.terms.join(", ")}.</p>
       <p className="small">Concepts that define this area: {t.concepts.join(", ")}.</p>
@@ -347,7 +355,7 @@ function About({ data }: { data: Dataset }) {
       </dl>
       <h3>Reading the map</h3>
       <ul className="plain">
-        <li>Positions come from a force layout that pulls similar titles together. Distances are visual approximations.</li>
+        <li>Positions come from category anchors and sparse links. Distance is for navigation, not a calibrated similarity measure.</li>
         <li>A solid line means the two names share a publication record. A dashed line is a thematic suggestion.</li>
         <li>“No joint publication in this snapshot” is the strongest absence claim made here.</li>
         <li>Dot size is uniform. Nothing on this map ranks people.</li>

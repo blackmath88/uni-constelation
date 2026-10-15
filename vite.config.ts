@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 
 // The app reads the committed JSON snapshot in data/. Only these files are
 // served/copied — data/raw/ stays out of the static bundle.
-const DATA_FILES = ["graph.json", "layout.json", "coverage.json", "publications.json", "researchers.json"];
+const DATA_FILES = ["graph.json", "layout.json", "coverage.json", "publications.json", "publication-details.json", "researchers.json"];
 
 function committedData(): Plugin {
   return {

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import type { Dataset } from "./data";
-import { otherEnd } from "./data";
+import { edgeHasVisibleEvidence, otherEnd, suggestionHasVisibleEvidence } from "./data";
 import { NO_TOPIC, topicColor } from "./colors";
 import type { Mode, Selection } from "./types";
 
@@ -91,6 +91,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
     }
     return s;
   }, [mode, nodes, visiblePubs, data]);
+  const visibleCoauthorEdges = useMemo(() => data.graph.edges.filter((e) => e.type === "coauthorship" && edgeHasVisibleEvidence(e, visiblePubs)).length, [data, visiblePubs]);
 
   // ---------- highlight model derived from the selection
   const hl: Highlight = useMemo(() => {
@@ -154,6 +155,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
         addLabel(r.id, r.displayName, "focus");
         // coauthor list is sorted by number of joint records; label only the first ten to stay readable
         (data.coauthorsByRes.get(r.id) ?? []).forEach((e, n) => {
+          if (!edgeHasVisibleEvidence(e, visiblePubs)) return;
           const o = otherEnd(e, r.id);
           secondary.add(o);
           const a = pos(r.id), b = pos(o);
@@ -161,6 +163,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
           if (n < 10) addLabel(o, data.resById.get(o)?.displayName ?? o, "context");
         });
         for (const s of data.suggestionsByRes.get(r.id) ?? []) {
+          if (!suggestionHasVisibleEvidence(s, visiblePubs)) continue;
           const o = s.researcherA === r.id ? s.researcherB : s.researcherA;
           const a = pos(r.id), b = pos(o);
           if (a && b) { lines.push({ a, b, kind: "similarity" }); secondary.add(o); addLabel(o, data.resById.get(o)?.displayName ?? o, "context"); }
@@ -191,7 +194,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
       }
     }
     return { primary, secondary, lines, labels, active: true };
-  }, [selection, data, mode, posById, nodes]);
+  }, [selection, data, mode, posById, nodes, visiblePubs]);
 
   // ---------- drawing
   useEffect(() => {
@@ -202,7 +205,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
     const paper = css.getPropertyValue("--paper").trim() || "#F5F6F4";
     const accent = css.getPropertyValue("--accent").trim() || "#2442C4";
     const coLinks = mode === "coauthors"
-      ? data.graph.edges.filter((e) => e.type === "coauthorship" && posById.has(e.source) && posById.has(e.target))
+      ? data.graph.edges.filter((e) => e.type === "coauthorship" && edgeHasVisibleEvidence(e, visiblePubs) && posById.has(e.source) && posById.has(e.target))
       : [];
 
     drawRef.current = () => {
@@ -315,7 +318,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
         .call((g) => g.selectAll<SVGTextElement, (typeof sel)[number]>("text").text((d) => d.text));
     };
     drawRef.current();
-  }, [nodes, posById, visible, hl, mode, data, selection]);
+  }, [nodes, posById, visible, hl, mode, data, selection, visiblePubs]);
 
   // ---------- size + zoom
   const fit = (animate: boolean) => {
@@ -430,6 +433,7 @@ export function MapView({ data, mode, selection, visiblePubs, onSelect, reducedM
         onClick={onClick}
         onKeyDown={onKey}
         data-testid="map"
+        data-visible-coauthor-edges={mode === "coauthors" ? visibleCoauthorEdges : undefined}
       >
         <canvas ref={canvasRef} />
         <svg ref={svgRef} className="map-labels" aria-hidden="true">
@@ -470,7 +474,7 @@ function MapLegend({ mode }: { mode: Mode }) {
     <div className="legend" aria-label="Legend">
       <div className="legend-row">
         <span className="dot" style={{ background: NO_TOPIC }} />
-        {mode === "topics" ? "One dot = one publication, coloured by legal area (grey: not assigned)" : "One dot = one researcher, coloured by their most frequent legal area"}
+        {mode === "topics" ? "One dot = one publication, coloured by primary subject (grey: not assigned)" : "One dot = one researcher, coloured by their most frequent subject"}
       </div>
       <div className="legend-row">
         <svg width="28" height="8" aria-hidden="true"><line x1="0" y1="4" x2="28" y2="4" stroke="var(--ink)" strokeWidth="1.8" /></svg>

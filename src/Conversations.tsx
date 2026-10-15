@@ -1,12 +1,14 @@
 import { useMemo } from "react";
-import type { Dataset } from "./data";
+import { suggestionHasVisibleEvidence, type Dataset } from "./data";
 import type { Selection, Suggestion } from "./types";
 
 /** A small, diverse set of the strongest evidence-linked pairings: each researcher appears at most once. */
-export function topConversations(data: Dataset, n = 8): Suggestion[] {
+export function topConversations(data: Dataset, visiblePubs: Set<string>, n = 8): Suggestion[] {
   const used = new Set<string>();
   const out: Suggestion[] = [];
-  for (const s of [...data.graph.suggestions].sort((a, b) => b.score - a.score)) {
+  const featured = new Set(data.graph.featuredSuggestionIds);
+  for (const s of [...data.graph.suggestions].sort((a, b) => Number(featured.has(b.id)) - Number(featured.has(a.id)) || b.score - a.score)) {
+    if (!suggestionHasVisibleEvidence(s, visiblePubs)) continue;
     if (used.has(s.researcherA) || used.has(s.researcherB)) continue;
     used.add(s.researcherA); used.add(s.researcherB);
     out.push(s);
@@ -15,13 +17,13 @@ export function topConversations(data: Dataset, n = 8): Suggestion[] {
   return out;
 }
 
-export function Conversations({ data, selection, onSelect }: { data: Dataset; selection: Selection; onSelect: (s: Selection) => void }) {
-  const list = useMemo(() => topConversations(data), [data]);
+export function Conversations({ data, selection, visiblePubs, onSelect }: { data: Dataset; selection: Selection; visiblePubs: Set<string>; onSelect: (s: Selection) => void }) {
+  const list = useMemo(() => topConversations(data, visiblePubs), [data, visiblePubs]);
   return (
     <section className="conversations" aria-labelledby="conv-h">
-      <div className="section-head"><h2 id="conv-h">Possible conversations</h2></div>
+      <div className="section-head"><h2 id="conv-h">Across the faculty boundary</h2></div>
       <p className="hint">
-        Pairs of researchers whose publications share specific terms but who have no joint publication in this snapshot.
+        Pairs supported by one Law-listed and one Economics-listed publication that both pass the active filters.
         These are suggestions from keyword overlap, not known collaborations.
       </p>
       {list.length === 0 && <p className="muted">No pairing meets the evidence threshold in this snapshot.</p>}
@@ -45,7 +47,7 @@ export function ConversationItem({ s, data, selection, onSelect, perspective }: 
           {perspective ? <>{second.displayName}</> : <>{first.displayName}<span className="conv-amp"> and </span>{second.displayName}</>}
         </span>
         <span className="conv-terms">{s.sharedTerms.slice(0, 3).join(", ")}</span>
-        <span className="conv-why">Why this connection?</span>
+        <span className="conv-why">Why explore this connection?</span>
       </button>
     </li>
   );

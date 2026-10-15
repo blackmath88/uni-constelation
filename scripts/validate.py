@@ -19,6 +19,10 @@ def err(msg: str) -> None:
 
 def main() -> int:
     pubs = json.loads((DATA / "publications.json").read_text("utf-8"))
+    details = json.loads((DATA / "publication-details.json").read_text("utf-8"))
+    if set(details) != {p["id"] for p in pubs}:
+        err("publication detail IDs do not exactly match overview IDs")
+    pubs = [{**p, **details.get(p["id"], {})} for p in pubs]
     res = json.loads((DATA / "researchers.json").read_text("utf-8"))
     graph = json.loads((DATA / "graph.json").read_text("utf-8"))
     layout = json.loads((DATA / "layout.json").read_text("utf-8"))
@@ -107,12 +111,34 @@ def main() -> int:
                 err(f"suggestion {s['id']} evidence has fewer than two shared terms")
         if "No joint publication in this snapshot" not in s["absenceNote"]:
             err(f"suggestion {s['id']} absence note wording")
-        if not s["question"].lower().startswith("suggested"):
-            err(f"suggestion {s['id']} question not labelled as suggestion")
+        if s.get("question") and not s["question"].lower().startswith("a question to investigate"):
+            err(f"suggestion {s['id']} question not framed as an investigation")
+        for ev in s["evidence"]:
+            fa = next(p["facultyMemberships"] for p in pubs if p["id"] == ev["publicationA"])
+            fb = next(p["facultyMemberships"] for p in pubs if p["id"] == ev["publicationB"])
+            if not ((fa == ["law"] and fb == ["economics"]) or (fa == ["economics"] and fb == ["law"])):
+                err(f"suggestion {s['id']} is not supported by exclusive cross-faculty records")
     if coverage["unique"] != len(pubs):
         err("coverage unique count does not match publications.json")
     if len(layout["topics"]) != len(graph["topics"]):
         err("layout topic count mismatch")
+    semantic_path = DATA / "semantic-neighbors.json"
+    if semantic_path.exists():
+        semantic = json.loads(semantic_path.read_text("utf-8"))
+        if semantic.get("revision") != "e8f8c211226b894fcb81acc59f3b34ba3efd5f42":
+            err("unexpected semantic model revision")
+        pub_by = {p["id"]: p for p in pubs}
+        per_law = Counter()
+        for pair in semantic.get("pairs", []):
+            a, b = pair["publicationA"], pair["publicationB"]
+            if a not in P or b not in P:
+                err("semantic neighbour cites unknown publication")
+                continue
+            if pub_by[a]["facultyMemberships"] != ["law"] or pub_by[b]["facultyMemberships"] != ["economics"]:
+                err("semantic neighbour is not exclusive Law to Economics")
+            per_law[a] += 1
+        if per_law and max(per_law.values()) > semantic["parameters"]["topKAcrossFaculty"]:
+            err("semantic neighbour list exceeds configured top-k")
 
     print(f"validated {len(pubs)} publications, {len(res)} researchers, {len(graph['edges'])} edges, "
           f"{len(graph['suggestions'])} suggestions")

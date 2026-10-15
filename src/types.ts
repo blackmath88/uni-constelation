@@ -13,20 +13,24 @@ export interface Publication {
   authorsSource: "edoc" | "citation";
   doi: string | null;
   sourceUrl: string;
-  links: Record<string, string>;
+  links?: Record<string, string>;
   fetchedAt: string;
-  rawCitation: string;
-  container: string | null;
-  abstract: string | null;
+  rawCitation?: string;
+  container?: string | null;
+  abstract?: string | null;
+  hasAbstract: boolean;
   abstractSource: string | null;
   keywords: string[];
   language: string | null;
   languageSource: string | null;
-  edocMatch: { method: string; confidence: string; handle: string | null } | null;
+  edocMatch?: { method: string; confidence: string; handle: string | null } | null;
   facultyScope: string;
-  parseWarnings: string[];
+  facultyMemberships: ("law" | "economics")[];
+  sourceRecords?: { faculty: "law" | "economics"; orgUnitId: string; listingUrl: string; listPosition: number; fetchedAt: string }[];
+  parseWarnings?: string[];
   topicId: string | null;
   topicBasis: string | null;
+  subjectLabels: string[];
 }
 
 export interface Researcher {
@@ -63,7 +67,10 @@ export interface Suggestion {
   method: string;
   confidenceLabel: string;
   absenceNote: string;
-  question: string;
+  question: string | null;
+  sharedSubject: string[];
+  facultyBridge: ["law", "economics"];
+  evidenceCoverage: { pairs: number; withAbstractOnBothSides: number };
 }
 
 export interface Topic { id: string; label: string; concepts: string[]; terms: string[]; size: number; byBasis: Record<string, number> }
@@ -78,6 +85,7 @@ export interface Graph {
   concepts: Record<string, string>;
   edges: Edge[];
   suggestions: Suggestion[];
+  featuredSuggestionIds: string[];
 }
 
 export interface Layout {
@@ -103,4 +111,4 @@ export type Selection =
   | { kind: "topic"; id: string }
   | null;
 
-export interface Filters { yearMin: number; yearMax: number; types: Set<string>; abstractsOnly: boolean }
+export interface Filters { yearMin: number; yearMax: number; types: Set<string>; faculties: Set<"law" | "economics">; abstractsOnly: boolean }
