@@ -1,0 +1,95 @@
+{
+  "sources": [
+    {
+      "name": "UNIverse public org-unit publication listing",
+      "url": "https://universe.unibas.ch/org-units/47838/publications",
+      "endpoint": "https://universe-intern.unibas.ch/api/public/prp/orgUnits/publications"
+    },
+    {
+      "name": "edoc.unibas.ch DSpace discovery search",
+      "url": "https://edoc.unibas.ch",
+      "endpoint": "https://edoc.unibas.ch/server/api/discover/search/objects"
+    }
+  ],
+  "retrievalStarted": "2026-10-15T16:32:47Z",
+  "snapshotDate": "2026-10-15",
+  "sourceReportedTotal": 7807,
+  "maxRecordsRequested": 60,
+  "pagesFetched": 1,
+  "pagesFailed": 0,
+  "fetched": 100,
+  "unique": 60,
+  "duplicatesSkipped": 0,
+  "stopReason": "max_records reached",
+  "samplingRule": "UNIverse listing order (newest first as displayed), first N unique records",
+  "yearRange": [
+    2026,
+    2026
+  ],
+  "publicationsWithoutYear": 0,
+  "byYear": {
+    "2026": 60
+  },
+  "byType": {
+    "Journal article": 20,
+    "Commentary contribution": 13,
+    "Book": 7,
+    "Book chapter": 6,
+    "Working paper": 3,
+    "Journal contribution": 2,
+    "Thesis": 2,
+    "Review / commentary article": 1,
+    "Encyclopedia entry": 1,
+    "Blogpost": 1,
+    "Website": 1,
+    "Legal commentary": 1,
+    "Other": 1,
+    "Beitrag in festschrift": 1
+  },
+  "typeSource": {
+    "edoc": 20,
+    "inferred from citation format": 40
+  },
+  "abstractCoverage": {
+    "withAbstract": 15,
+    "share": 0.25
+  },
+  "edoc": {
+    "matched": 20,
+    "byMethod": {
+      "handle": 20
+    },
+    "unresolved": 40,
+    "unresolvedReasons": {
+      "no edoc candidate found": 33,
+      "title too short/generic for title matching": 5,
+      "title match but year differs (2020)": 1,
+      "title match but year differs (2012)": 1
+    },
+    "requestsUsed": 5,
+    "requestCap": 20,
+    "capReached": false
+  },
+  "incompleteAuthorLists": 4,
+  "publicationsWithParseWarnings": 13,
+  "publicationsWithoutTopicTerms": 13,
+  "identities": {
+    "edoc-person-record": 20,
+    "name-only": 48,
+    "initials-only": 2
+  },
+  "unresolvedIdentities": 50,
+  "edges": {
+    "thematic-similarity": 69,
+    "author-of": 118,
+    "coauthorship": 176
+  },
+  "suggestions": 1,
+  "knownExclusions": [
+    "Only the Faculty of Law org-unit listing (47838); other faculties are out of scope.",
+    "No full texts, reference lists or citation links were collected.",
+    "No ORCID enrichment in this slice.",
+    "Records not found in edoc have only citation-derived authors, types and no abstracts.",
+    "Author lists shortened with 'et al.' are incomplete unless edoc provides the full list."
+  ]
+}

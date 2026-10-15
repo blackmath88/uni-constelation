@@ -1,0 +1,822 @@
+{
+ "source": "edoc.unibas.ch DSpace discovery search",
+ "endpoint": "https://edoc.unibas.ch/server/api/discover/search/objects",
+ "requestsUsed": 5,
+ "requestCap": 20,
+ "capReached": false,
+ "matches": {
+  "269428": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "a9c102a6-17d9-43d7-a379-ab7cfc9bbfc6",
+    "handle": "20.500.14716/211436",
+    "title": "Artificial intelligence in radiology: safeguarding patients’ rights in the digital era",
+    "year": 2026,
+    "type": "journal_article",
+    "authors": [
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     }
+    ],
+    "editors": [],
+    "abstract": null,
+    "language": "eng",
+    "subjects": [],
+    "doi": "10.1007/s00330-025-12221-9",
+    "journal": "European Radiology",
+    "orgUnits": [
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "281866": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "4b6de0f7-8265-4418-9a78-703375f29ae5",
+    "handle": "20.500.14716/222043",
+    "title": "„Sterbekulturen“: Die Bedeutung von Motiven und Methoden bei der Suizidbeihilfe in der Schweiz (Art. 115 StGB)",
+    "year": 2026,
+    "type": "journal_article",
+    "authors": [
+     {
+      "name": "Geth, Christopher",
+      "authority": "20f0cedb-fe7b-40dc-9455-51e022c75cc0"
+     }
+    ],
+    "editors": [],
+    "abstract": "Der Beitrag untersucht am Beispiel der Suizidkapsel „Sarco“, wie Motive und Methoden der Suizidbeihilfe die strafrechtliche Bewertung nach Art. 115 StGB prägen. Die Analyse zeigt, dass ärztliches Standesrecht und Betäubungsmittelrecht die Praxis organisierter Suizidhilfe erheblich strukturieren, strafrechtliche Grenzen aber nicht ohne klare gesetzliche Grundlage aus standesrechtlichen Wertungen abgeleitet werden dürfen. Das Merkmal der selbstsüchtigen Beweggründe in Art. 115 StGB ist nur legitimierbar, soweit es autonomierelevante Instrumentalisierungsrisiken erfasst. Dagegen darf es nicht dazu dienen, ungewohnte, entmedikalisierte oder kulturell irritierende Sterbeformen strafrechtlich zu belasten. Der Beitrag plädiert für eine stärkere prozedurale Absicherung der Freiverantwortlichkeit und für eine gesetzliche Klärung der Verantwortlichkeiten bei der Suizidhilfe.",
+    "language": "deu",
+    "subjects": [],
+    "doi": "10.1007/s00350-026-7436-0",
+    "journal": "Medizinrecht",
+    "orgUnits": [
+     "Professur für Strafrecht (Geth)"
+    ]
+   }
+  },
+  "282391": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "484f5006-7b64-4ede-8d9b-d63f2c84c1f0",
+    "handle": "20.500.14716/222654",
+    "title": "High-risk without safeguards? The EU AI Act and the push for deregulation of medical AI",
+    "year": 2026,
+    "type": "review",
+    "authors": [
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     },
+     {
+      "name": "Solaiman, Barry",
+      "authority": null
+     },
+     {
+      "name": "Onitiu, Daria",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": "Artificial intelligence (AI) is increasingly embedded in clinical decision-making, yet recent proposals to simplify the European Union (EU) Artificial Intelligence Act (AI Act) have reopened the question of whether AI-enabled medical devices should remain subject to the AI Act’s full high-risk regime. Under the current framework, AI-enabled medical devices are regulated through a combination of sectoral medical device legislation (the Medical Devices Regulation (MDR) and In Vitro Diagnostic Medical Devices Regulation (IVDR)) and additional AI-specific safeguards contained in the AI Act. This narrative review analyses the Health Innovation Package and related legislative developments under the EU simplification agenda and examines their impact on the relationship between the AI Act and medical device law. It shows that the proposed reform would retain the high-risk classification of AI-enabled medical devices while removing most associated AI Act obligations. In effect, this decouples risk classification from the safeguards that give it regulatory meaning, including requirements on data governance, risk management, human oversight and postmarket monitoring. Rather than resolving regulatory overlap, the amendments shift the centre of gravity back to product-focused medical device law without ensuring equivalent AI-specific safeguards. These changes may narrow attention to fundamental rights, weaken oversight in clinical use and increase legal uncertainty regarding accountability and responsibility. In a domain where AI systems directly shape clinical decisions and patient outcomes, these changes risk undermining the conditions for safe, equitable and accountable deployment of medical AI.",
+    "language": "eng",
+    "subjects": [
+     "AI act",
+     "AI medical devices",
+     "EU law",
+     "Medical Devices Regulation",
+     "artificial intelligence",
+     "bioethics",
+     "digital law",
+     "digital omnibus",
+     "health law",
+     "medical AI",
+     "medical devices",
+     "medical law",
+     "patients' rights",
+     "technology law"
+    ],
+    "doi": "10.1136/bmjdh-2026-000184",
+    "journal": "BMJ Digital Health & AI",
+    "orgUnits": [
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "269056": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "974e6bd9-1438-4768-abc9-d0b3c368dbd5",
+    "handle": "20.500.14716/203245",
+    "title": "Kommentierung zu Art. 18 DSG (Veröffentlichung von Personendaten in elektronischer Form)",
+    "year": 2026,
+    "type": "legal_commentary",
+    "authors": [
+     {
+      "name": "Dauag, Apollo",
+      "authority": "392599af-b1aa-4010-8b9b-ac7d3acd223b"
+     }
+    ],
+    "editors": [],
+    "abstract": "Werden Personendaten zur Information der Öffentlichkeit mittels automatisierter Informationsund Kommunikationsdienste allgemein zugänglich gemacht, so gilt dies nicht als Bekanntgabe ins Ausland, auch wenn die Daten vom Ausland aus zugänglich sind.",
+    "language": "deu",
+    "subjects": [],
+    "doi": "10.17176/20260105-132046-0",
+    "journal": null,
+    "orgUnits": [
+     "Fachbereich Öffentliches Recht",
+     "Professur für öffentliches Recht (Braun Binder)"
+    ]
+   }
+  },
+  "268790": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "b55c2d26-54cf-473a-9819-8b630246b5ef",
+    "handle": "20.500.14716/211799",
+    "title": "Künstliche Intelligenz in der Strafrechtspflege: Digitales Paradigma kritisch reflektiert",
+    "year": 2026,
+    "type": "book",
+    "authors": [
+     {
+      "name": "Gless, Sabine",
+      "authority": "f805ca05-890a-4dd7-aef9-09b074bb68c9"
+     },
+     {
+      "name": "Avedisian, Dorotea",
+      "authority": "c551172f-555d-4176-a0fd-412f397262e7"
+     }
+    ],
+    "editors": [],
+    "abstract": null,
+    "language": "deu",
+    "subjects": [],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Professur für Strafrecht und Strafprozessrecht (Gless)"
+    ]
+   }
+  },
+  "271426": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "2aacf3c4-cf87-4c31-b042-893ac2260f61",
+    "handle": "20.500.14716/209198",
+    "title": "Democratizing CRISPR? Legal complexity, access and the right to science",
+    "year": 2026,
+    "type": "journal_contribution",
+    "authors": [
+     {
+      "name": "Stocker, Mounia",
+      "authority": null
+     },
+     {
+      "name": "Bächler, Franziska",
+      "authority": "9bdf0d9f-eb67-48c1-8af4-08ebfd4a042c"
+     }
+    ],
+    "editors": [],
+    "abstract": "How do intellectual property rights and licensing structures influence access to CRISPR technologies? Could the right to science act as a complementary legal instrument to promote socially beneficial innovation?",
+    "language": "eng",
+    "subjects": [],
+    "doi": "10.1038/s41587-025-02997-y",
+    "journal": "Nature Biotechnology",
+    "orgUnits": [
+     "Professur für Privatrecht mit Schwerpunkt Life Sciences-Recht und Immaterialgüterrecht (Früh)",
+     "Professur für Privatrecht (Zellweger-Gutknecht)"
+    ]
+   }
+  },
+  "273024": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "d6dd3a11-9714-4225-a96e-e922a3fd5d0d",
+    "handle": "20.500.14716/207876",
+    "title": "Framework agreements regarding the international supply of goods and the CISG",
+    "year": 2026,
+    "type": "book",
+    "authors": [
+     {
+      "name": "Juhasz, Julian",
+      "authority": "2deb1310-b56b-4764-9597-e473ae9f2418"
+     }
+    ],
+    "editors": [],
+    "abstract": "In the context of international trade, the question arises whether CISG may be relied upon to deal with the practically frequent long-term contracts known as framework agreements, which underlie many contemporary supply systems. This book – the first comprehensive guide to the key legal questions arising at this intersection – provides a systematic and in-depth analysis of the United Nations Convention on Contracts for the International Sale of Goods (CISG’s) applicability to framework agreements and also highlights the actual application of the CISG’s substantive provisions to such contracts.",
+    "language": "eng",
+    "subjects": [],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Fachbereich Privatrecht",
+     "Doctoral Thesis"
+    ]
+   }
+  },
+  "276612": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "3cd2aa18-f360-4fe6-9171-3c19f9192bc4",
+    "handle": "20.500.14716/211800",
+    "title": "National Implementation of International Economic Law: Lithuania",
+    "year": 2026,
+    "type": "encyclopedia_entry",
+    "authors": [
+     {
+      "name": "Fausch, Inesa",
+      "authority": "cc14e89f-130d-4169-a63b-0a94f7b8d673"
+     },
+     {
+      "name": "Gudas, Karolis",
+      "authority": null
+     },
+     {
+      "name": "Daujotas, Rimantas",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": null,
+    "language": "eng",
+    "subjects": [],
+    "doi": "10.4337/9781800882324.national.implementation.international.economic.law.lithuania",
+    "journal": null,
+    "orgUnits": [
+     "Fachbereich Öffentliches Recht",
+     "Professur für Privatrecht mit Schwerpunkt Life Sciences-Recht und Immaterialgüterrecht (Früh)"
+    ]
+   }
+  },
+  "276491": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "15fdf776-7c38-425a-ac14-c166df1c522e",
+    "handle": "20.500.14716/208329",
+    "title": "Informed Consent for Organoid Use, White Paper",
+    "year": 2026,
+    "type": "working_paper",
+    "authors": [
+     {
+      "name": "Fausch, Inesa",
+      "authority": null
+     },
+     {
+      "name": "Zeyer-Iyengar, Daniel",
+      "authority": "b3b23b38-54b5-4be5-88cf-8417b882f191"
+     },
+     {
+      "name": "Aerts, Lina K.",
+      "authority": "6d43a90b-ebeb-4df1-a96e-765750d294c5"
+     },
+     {
+      "name": "Alves, Marco P.",
+      "authority": null
+     },
+     {
+      "name": "Druckman, Karen",
+      "authority": null
+     },
+     {
+      "name": "Enzmann, Volker",
+      "authority": null
+     },
+     {
+      "name": "Gervasoni, Pietro",
+      "authority": null
+     },
+     {
+      "name": "Gilverti Gai, Beatrice",
+      "authority": null
+     },
+     {
+      "name": "Hauser, Michel",
+      "authority": null
+     },
+     {
+      "name": "Hoehnel-Ka, Sylke",
+      "authority": null
+     },
+     {
+      "name": "Kruithof de Julio, Marianna",
+      "authority": null
+     },
+     {
+      "name": "Moretti, Matteo",
+      "authority": null
+     },
+     {
+      "name": "Mühlemann, Markus",
+      "authority": null
+     },
+     {
+      "name": "Pamies, David",
+      "authority": null
+     },
+     {
+      "name": "Sekulic, Marjana",
+      "authority": "884983ab-a510-47cb-aedc-0472c686d536"
+     },
+     {
+      "name": "Früh, Alfred",
+      "authority": "524cd96d-6245-42c4-bea7-d7930a1819a8"
+     }
+    ],
+    "editors": [],
+    "abstract": "The white paper highlights the need to reconsider existing informed consent practices in the light of advances in organoid research. It suggests some slight amendments to general informed consent forms but also looks at the main challenges, such as the use and sharing of organoids, their commercialisation, and how information about organoids is communicated to donors. The main goal is to foster a unified understanding of organoid technology and to encourage a constructive dialogue on how to improve consent practices in the future.",
+    "language": "eng",
+    "subjects": [
+     "Informed consent",
+     "Organoid"
+    ],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Bodmer Lab / Inner Ear Research",
+     "[FG]  Bielicki Julia Anna",
+     "Fachbereich Privatrecht",
+     "Professur für Privatrecht mit Schwerpunkt Life Sciences-Recht und Immaterialgüterrecht (Früh)"
+    ]
+   }
+  },
+  "277963": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "f4b2e1c7-5be7-4038-a124-39d69b9f3ef8",
+    "handle": "20.500.14716/213370",
+    "title": "Die Steuerungsfunktion des Strafrechts - zwischen Anspruch und Praxis",
+    "year": 2026,
+    "type": "journal_article",
+    "authors": [
+     {
+      "name": "Geth, Christopher",
+      "authority": "20f0cedb-fe7b-40dc-9455-51e022c75cc0"
+     }
+    ],
+    "editors": [],
+    "abstract": null,
+    "language": "deu",
+    "subjects": [],
+    "doi": null,
+    "journal": "Zeitschrift für Schweizerisches Recht",
+    "orgUnits": [
+     "Professur für Strafrecht (Geth)"
+    ]
+   }
+  },
+  "277935": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "88ff02d1-fffc-4db2-9eb5-97b2689b7666",
+    "handle": "20.500.14716/213355",
+    "title": "KI-Systeme in der Justiz: Typologisierung",
+    "year": 2026,
+    "type": "journal_contribution",
+    "authors": [
+     {
+      "name": "Altwicker, Tilmann",
+      "authority": null
+     },
+     {
+      "name": "Braun Binder, Nadja",
+      "authority": "b9d818f8-5c6a-40e5-8265-3151ec11a9d0"
+     },
+     {
+      "name": "Dauag, Apollo",
+      "authority": "392599af-b1aa-4010-8b9b-ac7d3acd223b"
+     },
+     {
+      "name": "Rüegger, Vanessa",
+      "authority": "6cdc172f-5853-4db1-8625-acd565547188"
+     },
+     {
+      "name": "Ruf, Julia",
+      "authority": "4f9e305d-7d13-4862-b10f-ba4891209bfd"
+     },
+     {
+      "name": "Seelmann, Martin",
+      "authority": "6d813bb3-7e21-434e-b335-df78d3ec20c6"
+     },
+     {
+      "name": "Simmler, Monika",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": "Künstliche Intelligenz (KI) hält Einzug auch in die Justiz. Dabei ist ein breites Spektrum an Anwendungen möglich. Für die Schweiz stellt sich vor diesem Hintergrund insbesondere die Frage, in welchen Erscheinungsformen solche Systeme künftig denkbar sind, welche Funktionen sie in justiziellen Abläufen übernehmen könnten und welche Herausforderungen damit verbunden wären. Eine begrifflich und systematisch belastbare Typologisierung ist für die Beurteilung dieser Fragen ein zentraler Zwischenschritt: Erst wenn hinreichend klar ist, welche Arten von KI-Systemen im Justizkontext überhaupt gemeint sind, lassen sich die damit verbundenen Chancen und Herausforderungen und insbesondere die rechtliche Erfassung präzise diskutieren. Ziel des vorliegenden Aufsatzes ist es entsprechend, eine auf den schweizerischen Kontext zugeschnittene, für verschiedene Rechtsgebiete und weitere Disziplinen anschlussfähige Typologisierung von KI-Systemen in der Justiz zu entwickeln. Sie soll Forschung und Praxis als deskriptive, strukturierende Kartierung dienen. -- L'intelligence artificielle (IA) fait progressivement son entrée dans le domaine judiciaire, où un large éventail d'applications peut être envisagé. Dans ce contexte, se pose notamment, pour la Suisse, la question des formes que pourraient prendre de tels systèmes à l'avenir, des fonctions qu'ils pourraient assumer dans les procédures judiciaires et des défis qu'ils soulèveraient. Pour évaluer ces enjeux, il est essentiel de disposer d'une typologie claire et cohérente. Ce n'est qu'après avoir suffisamment défini les différents types de systèmes d'IA susceptibles d'être utilisés dans le contexte judiciaire qu'il sera possible de discuter de manière précise des opportunités, des risques et, en particulier, du cadre juridique applicable. Le présent article a pour objectif de développer une typologie des systèmes d'IA dans le domaine judiciaire adaptée au contexte suisse et compatible avec différents domaines du droit ainsi qu'avec d'autres disciplines. Cette typologie entend servir à la recherche et à la pratique comme outil descriptif et structurant.",
+    "language": "deu",
+    "subjects": [
+     "AI",
+     "IA",
+     "Justiz",
+     "KI",
+     "Künstliche Intelligenz",
+     "Typologie"
+    ],
+    "doi": "10.21257/sg.294",
+    "journal": "sui generis",
+    "orgUnits": [
+     "Fachbereich Strafrecht",
+     "Fachbereich Öffentliches Recht",
+     "Professur Grundlagen des Rechts und Life Sciences-Recht (Fateh-Moghadam)",
+     "Professur für öffentliches Recht (Braun Binder)"
+    ]
+   }
+  },
+  "276510": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "d72f09e1-809a-4dc8-ac6c-38394bf7b2a1",
+    "handle": "20.500.14716/208878",
+    "title": "Advertising to the distressed: The commodification of mental health data in AI chatbots",
+    "year": 2026,
+    "type": "blogpost",
+    "authors": [
+     {
+      "name": "Gross, Nicole",
+      "authority": null
+     },
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     }
+    ],
+    "editors": [],
+    "abstract": "Generative Artificial Intelligence (genAI) chatbots have become an important outlet for many people around the world who are experiencing mental health issues. Of its 800 million weekly users, around 10 percent use ChatGPT for emotional support while more than one million use the chatbot to talk about issues such as depression, psychosis and suicidal ideation. For many users, these conversations feel intimate, tailored and supportive, like talking to a good friend or therapist. Yet these interactions take place within commercial digital platforms whose business models rely on collecting, analysing and commodifying user data. As Big Tech companies explore the use of behavioural advertising in genAI systems, influenced by the global market for health data being worth an estimated $74.41 bn, profound ethical tensions arise between the commodification of user data and the protection of vulnerable individuals seeking mental health support. On one hand, the World Health Organization states that mental health is a fundamental human right, which means that everyone has the right to available, accessible, acceptable, and good-quality mental healthcare. As more than 1 billion people live with mental health issues and many do not receive adequate care, more and more turn to genAI chatbots, which are often free, accessible and highly interactive. As AI chatbots are becoming quasi-therapeutic spaces, they exert an influence over the right to mental health. However, unlike traditional mental healthcare contexts where confidentiality and professional duties restrict the use of patient information, AI chatbots operate within a commercial ecosystem that is designed to maximise engagement and monetise user attention. This means that users pay a high yet often invisible price for their mental health.",
+    "language": "eng",
+    "subjects": [
+     "AI act",
+     "AI chatbots",
+     "GDPR",
+     "Global mental health",
+     "data capitalism",
+     "data justice",
+     "data protection",
+     "digital health",
+     "health data",
+     "mental health",
+     "privacy",
+     "wellbeing"
+    ],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "277061": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "9fa51924-cf93-4f0e-8295-3f6f8e128b5b",
+    "handle": "20.500.14716/211297",
+    "title": "Ablauf einer CRISPR/Cas-basierten Genomedierung in Pflanzen",
+    "year": 2026,
+    "type": "working_paper",
+    "authors": [
+     {
+      "name": "Früh, Alfred",
+      "authority": "524cd96d-6245-42c4-bea7-d7930a1819a8"
+     },
+     {
+      "name": "Hunziker, Sandra",
+      "authority": "411a9d7b-8d8a-4502-a039-c39c8864fd42"
+     },
+     {
+      "name": "Farizi, Muxhadid",
+      "authority": "ec9b3671-b688-4d59-8f9b-99585f4e2c2a"
+     }
+    ],
+    "editors": [],
+    "abstract": "Die Regulierung neuer Pflanzenzüchtungstechnologien ist Gegenstand eines kontrovers geführten gesellschaftlichen Diskurses. Für die normative Erfassung, Bewertung und Steuerung der neuen Technologien ist jedoch immer ein Grundwissen der technischen Zusammenhänge erforderlich, weil es sonst zu Regulierungsfehlern kommt. Der Beitrag versucht den Ablauf der CRISPR/Cas-basierten Genomeditierung in Pflanzen so zu rekapitulieren, dass die wesentlichen Vorgänge auch für Personen ohne naturwissenschaftliche Ausbildung nachvollziehbar sind.",
+    "language": "deu",
+    "subjects": [],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Fachbereich Privatrecht",
+     "Professur für Privatrecht mit Schwerpunkt Life Sciences-Recht und Immaterialgüterrecht (Früh)"
+    ]
+   }
+  },
+  "278441": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "7a4a0eb3-5838-49b0-a5d4-0926e35bc6d2",
+    "handle": "20.500.14716/214672",
+    "title": "Beyond social media: public health governance of artificial intelligence-based chatbots used by adolescents",
+    "year": 2026,
+    "type": "journal_article",
+    "authors": [
+     {
+      "name": "Cali, Alec",
+      "authority": null
+     },
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     }
+    ],
+    "editors": [],
+    "abstract": "AI chatbots such as ChatGPT, Gemini, and Claude are rapidly becoming part of adolescents’ everyday lives. We argue that AI chatbots should be understood as emerging public health technologies and incorporated into governance frameworks addressing adolescent health in digital environments.",
+    "language": "eng",
+    "subjects": [
+     "AI chatbots",
+     "AI law",
+     "AI regulation",
+     "health law",
+     "public health",
+     "social media"
+    ],
+    "doi": "10.1093/eurpub/ckag079",
+    "journal": "European Journal of Public Health",
+    "orgUnits": [
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "278442": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "0ab483ed-7638-461d-acdc-259f3ff00be9",
+    "handle": "20.500.14716/219056",
+    "title": "Emerging shadow health systems: regulating health-focused generative AI chatbots from a European perspective",
+    "year": 2026,
+    "type": "journal_article",
+    "authors": [
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     },
+     {
+      "name": "Petročnik, Tjasa",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": "ChatGPT Health and other health-focused generative AI chatbots increasingly function as alternative first points of contact that may mediate—and in some cases substitute—engagement with regulated healthcare systems. At scale, these systems can shape care-seeking behavior, system capacity, trust in clinical expertise, and health equity. We describe this development as the emergence of shadow health systems: privately governed infrastructures that perform health-system functions without being subject to healthcare-specific safeguards. EU law currently regulates such tools based on declared medical purpose rather than their real-world effects, creating gaps in legal protection. This Policy Brief examines the public health implications and regulatory positioning of health-focused generative AI chatbots in Europe and proposes targeted reforms to address emerging governance gaps.",
+    "language": null,
+    "subjects": [
+     "AI regulation",
+     "ChatGPT",
+     "ChatGPT Health",
+     "digital public health",
+     "generative AI",
+     "health chatbots",
+     "health equity",
+     "health law"
+    ],
+    "doi": "10.3389/fpubh.2026.1830068",
+    "journal": "Frontiers in Public Health",
+    "orgUnits": [
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "275802": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "1c4037de-1bc8-41f3-94a4-c3e93aa79bac",
+    "handle": "20.500.14716/208095",
+    "title": "Medical AI at Risk: Digital Omnibus Amendments Undermine Safeguards in Healthcare",
+    "year": 2026,
+    "type": "website",
+    "authors": [
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     },
+     {
+      "name": "Solaiman, Barry",
+      "authority": null
+     },
+     {
+      "name": "Onitiu, Daria",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": "Members of the European Parliament are about to take a decision that will fundamentally shape how artificial intelligence (AI) is governed in European healthcare. The Internal Market and Consumer Protection (IMCO) and Civil Liberties, Justice and Home Affairs (LIBE) compromise amendments propose deleting Annex I, Section A of the AI Act and shift medical devices into Annex I, Section B. If adopted, AI medical devices would remain labelled as “high-risk”, but would no longer be subject to meaningful high-risk obligations. In a domain where AI directly affects diagnosis, treatment, and patient health, this creates a serious regulatory gap with real risks for patients. The proposed solution – “mirroring” AI Act requirements into the Medical Devices Regulation (MDR) and In Vitro Diagnostic Medical Devices Regulation (IVDR) – does not address this gap, as it makes safeguards dependent on future delegated acts and standards, with no guarantee as to their timing or scope. This risks delaying and weakening protections while medical AI systems are already in use. This is not “simplication”, but a structural weakening of safeguards for medical AI.",
+    "language": "eng",
+    "subjects": [
+     "AI act",
+     "AI law",
+     "Digital Omnibus",
+     "EU law",
+     "artificial intelligence",
+     "deregulation",
+     "health law",
+     "medical AI",
+     "medical devices",
+     "medical law",
+     "patients rights",
+     "simplification",
+     "technology law"
+    ],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "273913": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "25954824-f752-4d68-a2ca-130a52f2ef3b",
+    "handle": "20.500.14716/206760",
+    "title": "Tobler/Beglinger-Brevier zum Paket Schweiz – EU (Bilaterale III)",
+    "year": 2026,
+    "type": "book",
+    "authors": [
+     {
+      "name": "Tobler, Christa",
+      "authority": "971798f3-dda5-4f48-b9f5-186703c8d0c5"
+     },
+     {
+      "name": "Beglinger, Jacques",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": "Frage- und Antwortdokument zu den neuen Abkommen Schweiz-EU (Paket Schweiz-EU, Bilaterale III)",
+    "language": "deu",
+    "subjects": [],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Professur für Europarecht (Tobler)",
+     "Europäisches Recht",
+     "Professur Tobler"
+    ]
+   }
+  },
+  "279295": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "b458a864-4fca-4c8e-8e92-c9e996c07108",
+    "handle": "20.500.14716/216603",
+    "title": "Artificial intelligence in the EU Safe Hearts Plan: prediction alone is not enough",
+    "year": 2026,
+    "type": "journal_article",
+    "authors": [
+     {
+      "name": "van Kolfschooten, Hannah",
+      "authority": "6760651f-bcf8-4adc-94da-15b87fe086f0"
+     },
+     {
+      "name": "Hattab, Georges",
+      "authority": null
+     },
+     {
+      "name": "Bächler, Franziska",
+      "authority": "9bdf0d9f-eb67-48c1-8af4-08ebfd4a042c"
+     },
+     {
+      "name": "Stefanini, Giulio",
+      "authority": null
+     }
+    ],
+    "editors": [],
+    "abstract": "The European Commission’s Safe Hearts Plan positions AI as a key tool for enhancing the prevention, diagnosis, and care of cardiovascular disease. Although AI presents significant opportunities, the Safe Hearts Plan may be overstating its impact by prioritising technological capacity over implementation readiness. This Viewpoint examines the role assigned to AI within the Safe Hearts Plan through a policy and legal analysis, drawing on EU policy documents, WHO/Europe reports, and literature on AI governance and cardiovascular care. It argues that a persistent “benefits gap” exists between AI’s technical performance and its real-world clinical impact, reflecting institutional, operational, and legal barriers to implementation. The Viewpoint further analyses how legal uncertainty surrounding regulation, liability, and patients’ rights may hinder the responsible integration of AI into cardiovascular care. It concludes that AI should be embedded within robust legal, institutional, and operational frameworks to improve cardiovascular outcomes rather than simply generate more accurate predictions.",
+    "language": "eng",
+    "subjects": [],
+    "doi": "10.1016/j.lanepe.2026.101784",
+    "journal": "The Lancet Regional Health - Europe",
+    "orgUnits": [
+     "Fachbereich Privatrecht",
+     "Professur für Privatrecht mit Schwerpunkt Life Sciences-Recht und Immaterialgüterrecht (Früh)",
+     "Professur für Privatrecht (Zellweger-Gutknecht)",
+     "Professur für  öffentliches Recht (Nils Schaks)"
+    ]
+   }
+  },
+  "279506": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "da34d5b2-a224-4dc0-b129-fcff3d76ebf0",
+    "handle": "20.500.14716/217413",
+    "title": "Of Rules and Tools: Rethinking Pathways for Advancing NAMs through Law and Technology (Working Paper)",
+    "year": 2026,
+    "type": "working_paper",
+    "authors": [
+     {
+      "name": "Früh, Alfred",
+      "authority": "524cd96d-6245-42c4-bea7-d7930a1819a8"
+     },
+     {
+      "name": "Fausch, Inesa",
+      "authority": "cc14e89f-130d-4169-a63b-0a94f7b8d673"
+     },
+     {
+      "name": "Zeyer-Iyengar, Daniel",
+      "authority": "b3b23b38-54b5-4be5-88cf-8417b882f191"
+     }
+    ],
+    "editors": [],
+    "abstract": "New approach methodologies (NAMs) based on organoid technology have great potential to replace or reduce animal testing. However, several scientific, technical, regulatory, and societal challenges block their adoption. Against this background, the paper outlines the possible legal and technical tools that could – in a next step – be used to draft sound policy measures for a broader uptake of NAMs in Switzerland.",
+    "language": "eng",
+    "subjects": [
+     "NAM",
+     "New Approach Methodology",
+     "animal testing",
+     "non-animal-methods"
+    ],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Fachbereich Privatrecht",
+     "Professur für Privatrecht mit Schwerpunkt Life Sciences-Recht und Immaterialgüterrecht (Früh)"
+    ]
+   }
+  },
+  "280109": {
+   "method": "handle",
+   "confidence": "high",
+   "item": {
+    "uuid": "1b4f349b-dc96-411e-b24e-4b2013b6a404",
+    "handle": "20.500.14716/218750",
+    "title": "Die Wahlrechte des Käufers einer mangelhaften Ware im schweizerischen Obligationenrecht",
+    "year": 2026,
+    "type": "beitrag_in_festschrift",
+    "authors": [
+     {
+      "name": "Jung, Peter",
+      "authority": "11f3ad6e-b62f-4793-a88c-0e2ee8db92fb"
+     }
+    ],
+    "editors": [],
+    "abstract": null,
+    "language": "eng",
+    "subjects": [],
+    "doi": null,
+    "journal": null,
+    "orgUnits": [
+     "Professur für Privatrecht (Jung)"
+    ]
+   }
+  }
+ },
+ "unresolved": {
+  "277926": "title too short/generic for title matching",
+  "273780": "title too short/generic for title matching",
+  "271281": "title too short/generic for title matching",
+  "277962": "title too short/generic for title matching",
+  "276559": "title too short/generic for title matching",
+  "282493": "title match but year differs (2020)",
+  "282491": "no edoc candidate found",
+  "278477": "no edoc candidate found",
+  "277483": "no edoc candidate found",
+  "278002": "no edoc candidate found",
+  "278001": "no edoc candidate found",
+  "278267": "no edoc candidate found",
+  "277928": "no edoc candidate found",
+  "278118": "no edoc candidate found",
+  "277543": "no edoc candidate found",
+  "277750": "no edoc candidate found",
+  "276502": "no edoc candidate found",
+  "276611": "no edoc candidate found",
+  "274857": "no edoc candidate found",
+  "276788": "no edoc candidate found",
+  "272935": "no edoc candidate found",
+  "272937": "no edoc candidate found",
+  "277205": "no edoc candidate found",
+  "271277": "no edoc candidate found",
+  "271278": "no edoc candidate found",
+  "271279": "no edoc candidate found",
+  "271280": "no edoc candidate found",
+  "269959": "title match but year differs (2012)",
+  "270180": "no edoc candidate found",
+  "282492": "no edoc candidate found",
+  "277467": "no edoc candidate found",
+  "281205": "no edoc candidate found",
+  "273578": "no edoc candidate found",
+  "277929": "no edoc candidate found",
+  "278713": "no edoc candidate found",
+  "277527": "no edoc candidate found",
+  "277546": "no edoc candidate found",
+  "280990": "no edoc candidate found",
+  "279560": "no edoc candidate found",
+  "277176": "no edoc candidate found"
+ },
+ "fetchedAt": "2026-10-15T16:32:56Z"
+}

@@ -1,0 +1,516 @@
+{
+ "source": "UNIverse public org-unit publication listing",
+ "listingUrl": "https://universe.unibas.ch/org-units/47838/publications",
+ "endpoint": "https://universe-intern.unibas.ch/api/public/prp/orgUnits/publications",
+ "orgUnitId": "47838",
+ "reportedTotal": 7807,
+ "maxRecords": 60,
+ "pageSize": 100,
+ "pages": [
+  {
+   "page": 0,
+   "size": 100,
+   "returned": 100,
+   "new": 60,
+   "reportedPage": 0,
+   "reportedTotal": 7807
+  }
+ ],
+ "duplicatesSkipped": 0,
+ "stopReason": "max_records reached",
+ "records": [
+  {
+   "sourceRecordId": "282391",
+   "listPosition": 0,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">van Kolfschooten, Hannah, Solaiman, Barry and Onitiu, Daria (2026) &lsquo;High-risk without safeguards? The EU AI Act and the push for deregulation of medical AI&rsquo;, <span style=\"font-style: italic\">BMJ Digital Health &amp; AI</span>, 2. Available at: https://doi.org/10.1136/bmjdh-2026-000184.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1136/bmjdh-2026-000184",
+    "EDOC": "https://hdl.handle.net/20.500.14716/222654"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "282493",
+   "listPosition": 1,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">M&uuml;ller, Andreas Th. (2026) &lsquo;The role of domestic actors in the implementation and enforcement of social rights&rsquo;, in <span style=\"font-style: italic\"> Research Handbook on International Law and Social Rights</span>. 2 edn. Edward Elgar Publishing ( Research Handbook on International Law and Social Rights), pp. 396&ndash;417. Available at: https://doi.org/10.4337/9781035355679.00031.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.4337/9781035355679.00031"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "281866",
+   "listPosition": 2,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Geth, Christopher (2026) &lsquo;&bdquo;Sterbekulturen&ldquo;: Die Bedeutung von Motiven und Methoden bei der Suizidbeihilfe in der Schweiz (Art. 115 StGB)&rsquo;, <span style=\"font-style: italic\">Medizinrecht</span>. 03.09.2026, 44, pp. 810&ndash;818. Available at: https://doi.org/10.1007/s00350-026-7436-0.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1007/s00350-026-7436-0",
+    "EDOC": "https://hdl.handle.net/20.500.14716/222043"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "282491",
+   "listPosition": 3,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">M&uuml;ller, Andreas Th. (2026) &lsquo;&bdquo;Die ich rief, die Geister . . .&rdquo;: Vom (un)heimlichen Wirken des Neutralit&auml;tsnarrativs in der Schweiz und &Ouml;sterreich&rsquo;, <span style=\"font-style: italic\">Jahrbuch des &ouml;ffentlichen Rechts der Gegenwart</span>, 74(1), pp. 381&ndash;401. Available at: https://doi.org/10.1628/joer-2026-0015.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1628/joer-2026-0015"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "279506",
+   "listPosition": 4,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fr&uuml;h, Alfred, Fausch, Inesa and Zeyer-Iyengar, Daniel (2026) &lsquo;Of Rules and Tools: Rethinking Pathways for Advancing NAMs through Law and Technology (Working Paper)&rsquo;, <span style=\"font-style: italic\">ZLSR Research Paper Series</span> [Preprint]. Zentrum f&uuml;r Liefe Science-Recht, Universit&auml;t Basel (ZLSR Research Paper Series, 2026-03).</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/217413"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "279295",
+   "listPosition": 5,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">van Kolfschooten, Hannah et al. (2026) &lsquo;Artificial intelligence in the EU Safe Hearts Plan: prediction alone is not enough&rsquo;, <span style=\"font-style: italic\">The Lancet Regional Health - Europe</span>. 27.07.2026, 67. Available at: https://doi.org/10.1016/j.lanepe.2026.101784.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1016/j.lanepe.2026.101784",
+    "EDOC": "https://hdl.handle.net/20.500.14716/216603"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276612",
+   "listPosition": 6,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fausch, Inesa, Gudas, Karolis and Daujotas, Rimantas (2026) &lsquo;National Implementation of International Economic Law: Lithuania&rsquo;, <span style=\"font-style: italic\">Elgar Encyclopedia of International Economic Law</span>. Edward Elgar Publishing Limited (Elgar Encyclopedia of International Economic Law). Available at: https://doi.org/10.4337/9781800882324.national.implementation.international.economic.law.lithuania.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.4337/9781800882324.national.implementation.international.economic.law.lithuania",
+    "EDOC": "https://hdl.handle.net/20.500.14716/211800",
+    "IS_PART_OF": "https://10.4337/9781800882324"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278477",
+   "listPosition": 7,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fausch, Inesa (2026) &lsquo;Zur Verwertung von Organoiden: Zwischen pers&ouml;nlichkeitsrechtlichem Kommerzialisierungsverbot und eigentumsrechtlicher Marktlogik&rsquo;, <span style=\"font-style: italic\">Risiko &amp;amp; Recht</span>, pp. 55&ndash;78. Available at: https://doi.org/10.36862/6wr3-6dhm.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.36862/6wr3-6dhm"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278442",
+   "listPosition": 8,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">van Kolfschooten, Hannah and Petročnik, Tjasa (2026) &lsquo;Emerging shadow health systems: regulating health-focused generative AI chatbots from a European perspective&rsquo;, <span style=\"font-style: italic\">Frontiers in Public Health</span>, 14. Available at: https://doi.org/10.3389/fpubh.2026.1830068.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.3389/fpubh.2026.1830068",
+    "EDOC": "https://hdl.handle.net/20.500.14716/219056"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278441",
+   "listPosition": 9,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Cali, Alec and van Kolfschooten, Hannah (2026) &lsquo;Beyond social media: public health governance of artificial intelligence-based chatbots used by adolescents&rsquo;, <span style=\"font-style: italic\">European Journal of Public Health</span>, 36(4). Available at: https://doi.org/10.1093/eurpub/ckag079.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1093/eurpub/ckag079",
+    "EDOC": "https://hdl.handle.net/20.500.14716/214672"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277483",
+   "listPosition": 10,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">B&auml;chler, Franziska and Gengotti, Anna (2026) &lsquo;Modernisierung der Kapitalstruktur unter Wahrung der Kontrollverh&auml;ltnisse&rsquo;, <span style=\"font-style: italic\">GesKR</span>, (2), pp. 247&ndash;251.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278002",
+   "listPosition": 11,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fausch, Inesa (2026) &lsquo;Personu ar ierobežotu lēmumu pieņem&scaron;anas spēju tiesības psihiatrijā Lietuvā&rsquo;, in <span style=\"font-style: italic\">Cilvēktiesībās balstīta veselības aprūpe cilvēkiem ar garīgiem traucējumiem</span>. LU Akadēmiskais apgāds (Cilvēktiesībās balstīta veselības aprūpe cilvēkiem ar garīgiem traucējumiem), pp. 213&ndash;226. Available at: https://doi.org/10.22364/ctbva.26.06.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.22364/ctbva.26.06"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278001",
+   "listPosition": 12,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Olsena, S. et al. (2026) <span style=\"font-style: italic\">Cilvēktiesībās balstīta veselības aprūpe cilvēkiem ar garīgiem traucējumiem</span>. LU Akadēmiskais apgāds. Available at: https://doi.org/10.22364/ctbva.26.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.22364/ctbva.26"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278267",
+   "listPosition": 13,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fr&uuml;h, Alfred (2026) &lsquo;Anspurch auf Abschluss einer Lizenz? Zur vertragsrechtlichen Durchsetzung von FRAND-Verpflichtungen&rsquo;, <span style=\"font-style: italic\">Basler Juristische Mitteilungen (BJM)</span>, pp. 127&ndash;144.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "269428",
+   "listPosition": 14,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">van Kolfschooten, Hannah (2026) &lsquo;Artificial intelligence in radiology: safeguarding patients&rsquo; rights in the digital era&rsquo;, <span style=\"font-style: italic\">European Radiology</span>. 13.01.2026, 36(6), pp. 5194&ndash;5196. Available at: https://doi.org/10.1007/s00330-025-12221-9.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1007/s00330-025-12221-9",
+    "EDOC": "https://hdl.handle.net/20.500.14716/211436"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277935",
+   "listPosition": 15,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Altwicker, Tilmann et al. (2026) &lsquo;KI-Systeme in der Justiz: Typologisierung&rsquo;, <span style=\"font-style: italic\">sui generis</span>, pp. 89&ndash;100. Available at: https://doi.org/10.21257/sg.294.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.21257/sg.294",
+    "EDOC": "https://hdl.handle.net/20.500.14716/213355"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277928",
+   "listPosition": 16,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fankhauser, Roland (2026) &lsquo;Kommentierung ZGB, Art. 17-30b, Art. Art. 80-89c und Art. 336&ndash;348&rsquo;, in <span style=\"font-style: italic\">OFK ZGB Kommentar Schweizerisches Zivilgesetzbuch</span>. 5. Auflage. Z&uuml;ri: Orell F&uuml;ssli (OFK ZGB Kommentar Schweizerisches Zivilgesetzbuch).</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277926",
+   "listPosition": 17,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fankhauser, Roland and Wolf, Stephan (2026) <span style=\"font-style: italic\">ZGB Kommentar</span>. 5. Auflage. Z&uuml;rich: Orell F&uuml;ssli.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278118",
+   "listPosition": 18,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Pecorelli, Fabio (2026) &lsquo;Kommentierung ZGB, Art. 328-335&rsquo;, in <span style=\"font-style: italic\">OFK ZGB Kommentar zum Schweizerischen Zivilgesetzbuch</span>. 5. Auflage. Z&uuml;rich: Orell F&uuml;ssli Verlag (OFK ZGB Kommentar zum Schweizerischen Zivilgesetzbuch), pp. 819&ndash;836.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277963",
+   "listPosition": 19,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Geth, Christopher (2026) &lsquo;Die Steuerungsfunktion des Strafrechts - zwischen Anspruch und Praxis&rsquo;, <span style=\"font-style: italic\">Zeitschrift f&uuml;r Schweizerisches Recht</span>, (2), pp. 317&ndash;360.</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/213370"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277543",
+   "listPosition": 20,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Achermann, Alberto et al. (2026) &lsquo;Verletzen die Bilateralen III den Zuwanderungsartikel der Bundesverfassung?&rsquo;, <span style=\"font-style: italic\">Jusletter</span>, pp. 1&ndash;15.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277750",
+   "listPosition": 21,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">M&uuml;ller, Andreas Th. et al. (2026) &lsquo;Verletzen die Bilateralen III den Zuwanderungsartikel der Bundesverfassung? Zur Diskussion um die Vereinbarkeit der im Rahmen der Bilateralen III vorgesehenen &Auml;nderungen des Freiz&uuml;gigkeitsabkommens Schweiz - EU mit Art. 121a Abs. 4 BV&rsquo;, <span style=\"font-style: italic\">Jusletter</span>. 18.05.2026, pp. 1&ndash;15.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276510",
+   "listPosition": 22,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Gross, Nicole and van Kolfschooten, Hannah (2026) &lsquo;Advertising to the distressed: The commodification of mental health data in AI chatbots&rsquo;, <span style=\"font-style: italic\">Journal of Medical Ethics Forum</span>. BMJ Publishing Group (Journal of Medical Ethics Forum), 14 April.</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/208878",
+    "IS_IDENTICAL_TO": "https://blogs.bmj.com/medical-ethics/2026/04/14/advertising-to-the-distressed-the-commodification-of-mental-health-data-in-ai-chatbots/"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276502",
+   "listPosition": 23,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fateh-Moghadam, Bijan (2026) &lsquo;Aktueller Stand des Rechts der Sterbehilfe aus Sicht der Schweiz&rsquo;, in <span style=\"font-style: italic\">Zwischen Schutz und Selbstbestimmung</span>. 1 edn. Baden-Baden: Nomos Verlag (Zwischen Schutz und Selbstbestimmung), pp. 275&ndash;293.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277061",
+   "listPosition": 24,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fr&uuml;h, Alfred, Hunziker, Sandra and Farizi, Muxhadid (2026) &lsquo;Ablauf einer CRISPR/Cas-basierten Genomedierung in Pflanzen&rsquo;, <span style=\"font-style: italic\">ZLSR Research Paper Series</span> [Preprint]. Universit&auml;t Basel, Juristische Fakult&auml;t (ZLSR Research Paper Series, 2006-02).</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/211297"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276491",
+   "listPosition": 25,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fausch, Inesa et al. (2026) &lsquo;Informed Consent for Organoid Use, White Paper&rsquo;. Uni Basel (01).</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/208329",
+    "IS_IDENTICAL_TO": "https://ius.unibas.ch/fileadmin/user_upload/ius/03_Forschung/08_ZLSR/Research_Paper_Series/ZLSR_RPS_2026-01.pdf"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "275802",
+   "listPosition": 26,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">van Kolfschooten, Hannah, Solaiman, Barry and Onitiu, Daria (2026) <span style=\"font-style: italic\">Medical AI at Risk: Digital Omnibus Amendments Undermine Safeguards in Healthcare</span>. Amsterdam: Health Action International.</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/208095",
+    "IS_IDENTICAL_TO": "https://haiweb.org/wp-content/uploads/2026/03/Medical-AI-at-Risk.pdf"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276611",
+   "listPosition": 27,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fausch, Inesa (2026) <span style=\"font-style: italic\">Patentability of stem cells, genes, organoids and embryo-models, EuroGCT Platform, Intellectual Property Rights: Patentability | EuroGCT</span>.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "274857",
+   "listPosition": 28,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">B&auml;chler, Franziska and Stocker, Mounia (2026) &lsquo;Rethinking Access to CRISPR Across Medicine and Agriculture&rsquo;, <span style=\"font-style: italic\">Behind the paper blog post, Springer Nature research communities</span>. (Behind the paper blog post, Springer Nature research communities), 12 March.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276788",
+   "listPosition": 29,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Sabine Gless (2026) &lsquo;Heiligt der Zweck die Mittel 2.0?&rsquo;, <span style=\"font-style: italic\">ZStrR Schweizerische Zeitschrift f&uuml;r Strafrecht</span>, 144(1/2026), pp. 80&ndash;107.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "273913",
+   "listPosition": 30,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Tobler, Christa and Beglinger, Jacques (2026) <span style=\"font-style: italic\">Tobler/Beglinger-Brevier zum Paket Schweiz &ndash; EU (Bilaterale III)</span>. Release 2026_02.1. Z&uuml;rich: www.eur-Charts.eu. Available at: https://www.eur-charts.eu/books/institutional-aspects-in-package-negotiations-ch-eu/.</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/206760",
+    "OTHER": "https://www.eur-charts.eu/books/institutional-aspects-in-package-negotiations-ch-eu/"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "273780",
+   "listPosition": 31,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Rhinow, Ren&eacute; et al. (2026) <span style=\"font-style: italic\">Schweizerisches Verfassungsrecht</span>. 4 edn. Basel: Helbing Lichtenhahn.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "272935",
+   "listPosition": 32,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Buser, Melissa and Fankhauser, Roland (2026) &lsquo;Kommentierung ZGB Art. 159-179&rsquo;, in <span style=\"font-style: italic\">Kurzkommentar Schweizerisches Zivilgesetzbuch (ZGB)</span>. 3 edn. Basel: Helbing Liechenthahn (Kurzkommentar Schweizerisches Zivilgesetzbuch (ZGB)), pp. 517&ndash;599.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "272937",
+   "listPosition": 33,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fankhauser, Roland (2026) &lsquo;Kommentierung ZGB, Art. 8-8b SchlT ZGB&rsquo;, in <span style=\"font-style: italic\">Kurzkommentar Schweizerisches Zivilgesetzbuch (ZGB)</span>. 3 edn. Basel: Helbing Liechtenhahn (Kurzkommentar Schweizerisches Zivilgesetzbuch (ZGB)), pp. 3095&ndash;3097.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "271426",
+   "listPosition": 34,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Stocker Mounia and B&auml;chler Franziska (2026) &lsquo;Democratizing CRISPR? Legal complexity, access and the right to science&rsquo;, <span style=\"font-style: italic\">Nature Biotechnology</span>, 44(2), pp. 183&ndash;188. Available at: https://doi.org/10.1038/s41587-025-02997-y.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.1038/s41587-025-02997-y",
+    "EDOC": "https://hdl.handle.net/20.500.14716/209198"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277205",
+   "listPosition": 35,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Balsiger, Mario (2026) <span style=\"font-style: italic\">Zugang zu Schutz im schweizerischen und europ&auml;ischen Migrationsrecht</span>. Doctoral Thesis. University of Basel.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "271277",
+   "listPosition": 36,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Braun Binder, Nadja and Egli, Catherine (2026) &lsquo;Einhaltung der Anforderungen (Art. 8 KI-VO)&rsquo;, in <span style=\"font-style: italic\">KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar</span>. 2. (KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar), pp. 381&ndash;394.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "271278",
+   "listPosition": 37,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Braun Binder, Nadja and Egli, Catherine (2026) &lsquo;Risikomanagementsystem (Art. 9 KI-VO)&rsquo;, in <span style=\"font-style: italic\">KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar</span>. 2. (KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar), pp. 394&ndash;412.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "271279",
+   "listPosition": 38,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Braun Binder, Nadja and Egli, Catherine (2026) &lsquo;Daten und Daten-Governance (Art. 10 KI-VO)&rsquo;, in <span style=\"font-style: italic\"> KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar</span>. 2. ( KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar), pp. 412&ndash;443.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "271280",
+   "listPosition": 39,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Braun Binder, Nadja and Egli, Catherine (2026) &lsquo;Technische Dokumentation (Art. 11 KI-VO)&rsquo;, in <span style=\"font-style: italic\">KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar</span>. 2. (KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar), pp. 443&ndash;448.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "271281",
+   "listPosition": 40,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Braun Binder, Nadja and Egli, Catherine (2026) &lsquo;Aufzeichnungspflichten (Art. 12)&rsquo;, in <span style=\"font-style: italic\">KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar</span>. 2. (KI-VO: Verordnung &uuml;ber K&uuml;nstliche Intelligenz, Kommentar), pp. 448&ndash;456.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "269959",
+   "listPosition": 41,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Breitenmoser, Stephan, M&uuml;ller, Andreas Th. and Weyeneth, Robert (2026) <span style=\"font-style: italic\">Europarecht. Unter Einbezug des Verh&auml;ltnisses Schweiz-EU</span>. 5 edn. Z&uuml;rich: Dike Verlag AG.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "270180",
+   "listPosition": 42,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Cavelti, Luzius (2026) &lsquo;Kommentar von Art. 1 Abs. 3 OECD-MA (Savings Clause)&rsquo;, in <span style=\"font-style: italic\">Kommentar zum Schweizerischen Steuerrecht</span>. 2 edn. Basel: Helbling (Kommentar zum Schweizerischen Steuerrecht), pp. 150&ndash;160.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "282492",
+   "listPosition": 43,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Cheetham Colin and M&uuml;ller, Andreas Th. (2026) &lsquo;Europarecht: Schweiz - Europ&auml;ische Union 2025&rsquo;, <span style=\"font-style: italic\">Schweizerische Zeitschrift f&uuml;r Internationales und Europ&auml;isches Recht (SRIEL)</span>, 36(3), pp. 387&ndash;422.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277467",
+   "listPosition": 44,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Cordula L&ouml;tscher and Bettina Fischer (2026) &lsquo;Vorl&auml;ufige Eintragung des Bauhandwerkerpfandrechts: Sonderbeweisgrad zuguns-ten des Unternehmers und Konsequenzen f&uuml;r den Grundeigent&uuml;mer&rsquo;, in <span style=\"font-style: italic\">Escales proc&eacute;durales, Recueil d&rsquo;&eacute;tudes en l&rsquo;honneur du Professeur Jacques Haldy</span>. (Escales proc&eacute;durales, Recueil d&rsquo;&eacute;tudes en l&rsquo;honneur du Professeur Jacques Haldy), pp. 99&ndash;129.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "281205",
+   "listPosition": 45,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Cordula L&ouml;tscher and Justin Paljuh (2026) &lsquo;Willensvollstrecker und Verwaltungsrat in Personalunion - Interessenkonflikte im Doppelmandat&rsquo;, in <span style=\"font-style: italic\">Mit Fug und Recht, Festschrift f&uuml;r Stephan Wolf</span>. (Mit Fug und Recht, Festschrift f&uuml;r Stephan Wolf), pp. 471&ndash;488.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "273578",
+   "listPosition": 46,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Cottier, Thomas and Tobler, Christa (2026) &lsquo;Being European, outside the EU: EFTA, EEA and UK&rsquo;, <span style=\"font-style: italic\">Common Market Law Review</span>, 63(1), pp. 35&ndash;48.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "269056",
+   "listPosition": 47,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Dauag, Apollo (2026) &lsquo;Kommentierung zu Art. 18 DSG (Ver&ouml;ffentlichung von Personendaten in elektronischer Form)&rsquo;, in <span style=\"font-style: italic\">Datenschutzgesetz (DSG), Onlinekommentar: Der frei zug&auml;ngliche Rechtskommentar.</span> 1 edn. (Onlinekommentar : Der frei zug&auml;ngliche Rechtskommentar), pp. 1&ndash;6. Available at: https://doi.org/10.17176/20260105-132046-0.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.17176/20260105-132046-0",
+    "EDOC": "https://hdl.handle.net/20.500.14716/203245",
+    "IS_IDENTICAL_TO": "https://onlinekommentar.ch/de/kommentare/dsg18",
+    "IS_PART_OF": "https://onlinekommentar.ch/"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277929",
+   "listPosition": 48,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fankhauser, Roland (2026) &lsquo;Kommentierung SchlT ZGB Art. 6d, Art. 49-50&rsquo;, in <span style=\"font-style: italic\">OFK ZGB Kommentar Schweizerisches Zivilgesetzbuch</span>. 5. Auflage. Z&uuml;rich: Orell F&uuml;ssli (OFK ZGB Kommentar Schweizerisches Zivilgesetzbuch).</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "278713",
+   "listPosition": 49,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Fr&uuml;h, Alfred (2026) &lsquo;100 Jahre AIPPI Schweiz: Entwicklungen und Perspektiven des Schweizer Immaterialg&uuml;terrechts&rsquo;, <span style=\"font-style: italic\">sic! : Zeitschrift f&uuml;r Immaterialg&uuml;ter-, Informations- und Wettbewerbsrecht</span>, (2026, 7-8), pp. 419&ndash;432.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277962",
+   "listPosition": 50,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Geth, Christopher and Wohlers, Wolfgang (2026) &lsquo;Legendierte Kontrollen&rsquo;, <span style=\"font-style: italic\">sui generis</span>, pp. 13&ndash;29. Available at: https://doi.org/10.21257/sg.288.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.21257/sg.288"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "276559",
+   "listPosition": 51,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Gless, Sabine (2026) &lsquo;Beweisen und Bewerten&rsquo;, in <span style=\"font-style: italic\">Werksbesichtigung Ingeborg Puppe</span>. Berlin: Duncker &amp; Humblot (Schriften zum Strafrechtsvergleich), pp. 21&ndash;32.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277527",
+   "listPosition": 52,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Gless, Sabine (2026) &lsquo;Anmerkungen zu OGer ZH v. 15.8.2025: Grundsatz der Territorialit&auml;t; rechtliches Geh&ouml;r: Einsatz von technischen &Uuml;berwachungsger&auml;ten; SkyECC; MITM; Verwertbarkeit&rsquo;, <span style=\"font-style: italic\">forumpoenale</span>, (2/2026), pp. 109&ndash;129.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277546",
+   "listPosition": 53,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Gless, S. (2026) &lsquo;European Approaches to AI-Generated Evidence in Criminal Proceedings&rsquo;. other. Hart Publishing. Available at: https://doi.org/10.5040/9781509976591.ch-002.</div>\n</div>",
+   "urls": {
+    "DOI": "https://doi.org/10.5040/9781509976591.ch-002"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "268790",
+   "listPosition": 54,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Gless, Sabine and Avedisian, Dorotea (2026) <span style=\"font-style: italic\">K&uuml;nstliche Intelligenz in der Strafrechtspflege: Digitales Paradigma kritisch reflektiert</span>. Basel: Helbing Lichtenhahn Verlag.</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/211799"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "273024",
+   "listPosition": 55,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Juhasz, Julian (2026) <span style=\"font-style: italic\">Framework agreements regarding the international supply of goods and the CISG</span>, <span style=\"font-style: italic\">Global Trade Law Series</span>. Alphen aan den Rijn: Wolters Kluwer (Global Trade Law Series).</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/207876"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "280109",
+   "listPosition": 56,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Jung, Peter (2026) &lsquo;Die Wahlrechte des K&auml;ufers einer mangelhaften Ware im schweizerischen Obligationenrecht&rsquo;, <span style=\"font-style: italic\">Die unverzichtbare Wissenschaft. Festschrift f&uuml;r Wolfgang Ernst zum 70. Geburtstag</span>. Edited by R&uuml;fner, Thomas;Babusiaux, Ulrike. Mohr Siebeck.</div>\n</div>",
+   "urls": {
+    "EDOC": "https://hdl.handle.net/20.500.14716/218750",
+    "IS_PART_OF": "https://doi.org/10.1628/978-3-16-200552-6"
+   },
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "280990",
+   "listPosition": 57,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Kiener, Regina and Thurnherr, Daniela (2026) &lsquo;Kommentierung von Art. 5-7 BGG&rsquo;, in <span style=\"font-style: italic\">Bundesgerichtsgesetz, Basler Kommentar</span>. (Bundesgerichtsgesetz, Basler Kommentar), pp. 165&ndash;195.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "279560",
+   "listPosition": 58,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Klemperer, Jonas and Thurnherr, Daniela (2026) &lsquo;&Uuml;bersicht &uuml;ber die Rechtsprechung des Kantonsgerichts Basel-Landschaft und des Ap-pellationsgerichts Basel-Stadt im Jahr 2025 zum Verfassungs- und Verwaltungsrecht&rsquo;, <span style=\"font-style: italic\">Basler juristische Mitteilungen</span>, pp. 185&ndash;211.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  },
+  {
+   "sourceRecordId": "277176",
+   "listPosition": 59,
+   "bibliographyHtml": "<div class=\"csl-bib-body\">\n  <div class=\"csl-entry\">Losi, Giulia (2026) <span style=\"font-style: italic\">State and corporate obligations for the protection of people in relation to activities in the Area</span>. Doctoral Thesis. University of Basel.</div>\n</div>",
+   "urls": {},
+   "fetchedAt": "2026-10-15T16:32:49Z"
+  }
+ ],
+ "crawlStartedAt": "2026-10-15T16:32:47Z"
+}
