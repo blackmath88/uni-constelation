@@ -1,6 +1,18 @@
+<!-- BEGIN public-repo-header -->
+<div align="center">
+
 # Uni Constellation
 
-### Make research visible. Find a conversation worth having.
+**Make research visible. Find a conversation worth having.**
+
+<a href="https://github.com/blackmath88/uni-constelation/actions/workflows/ci.yml"><img alt="Checks" src="https://github.com/blackmath88/uni-constelation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+<a href="https://github.com/blackmath88/uni-constelation/blob/main/AGENTS.md"><img alt="Competition demo: frozen" src="https://img.shields.io/badge/demo-frozen-806743?style=flat"></a>
+<a href="https://github.com/blackmath88/uni-constelation"><img alt="Primary language: Python" src="https://img.shields.io/badge/language-Python-526078?style=flat"></a>
+<a href="https://github.com/blackmath88/uni-constelation/tree/main/docs"><img alt="Documentation" src="https://img.shields.io/badge/docs-guide-16796f?style=flat"></a>
+<a href="https://github.com/blackmath88/uni-constelation/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/blackmath88/uni-constelation?style=flat&amp;color=737373"></a>
+
+</div>
+<!-- END public-repo-header -->
 
 Explore how publications and researchers connect across the University of Basel's Law and Business and Economics listings. Follow a connection back to the publications that support it.
 
