@@ -37,7 +37,8 @@ jobs:
           path: dist
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    # Submission freeze: keep the existing GitHub Pages deployment unchanged.
+    if: ${{ false }}
     needs: build
     runs-on: ubuntu-latest
     permissions:
