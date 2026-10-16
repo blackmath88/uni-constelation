@@ -14,3 +14,7 @@ Do not change application code, datasets, prototype content, repository name, vi
 The Pages deployment job is deliberately disabled with a false condition. Preserve the existing hosted deployment. Do not re-enable deployment or lift this freeze without Achim's explicit instruction.
 
 This is a documented repository freeze and a workflow deployment guard, not a GitHub administrative read-only lock. Existing hosting remains enabled. No repository archival or deletion was performed.
+
+## Public presentation exception — 16 October 2026
+
+The owner subsequently authorised a reviewable GitHub presentation upgrade. README, contribution guidance, issue/PR templates and repository-only documentation may be changed on a review branch. This is a narrow documentation exception: application code, datasets, deployed assets, deployment guards, Pages settings, submitted URLs and the preserved submission branch remain frozen. Do not treat presentation approval as authority to redeploy or merge feature work.
